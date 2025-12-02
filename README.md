@@ -4,7 +4,7 @@
 
 Site portfolio/CV moderne et responsive conçu avec une approche **mobile-first**. 
 
-Ce projet met en avant mes compétences en développement web, mes projets réalisés et mon parcours professionnel à travers une interface élégante et performante.
+Ce projet met en avant mes compétences en développement web et mon apprendtissage en auto didacte de Rezà travers une interface élégante et performante.
 
 Le site est construit pour offrir une expérience utilisateur optimale sur tous les appareils, du smartphone au desktop, avec un accent particulier sur les performances et l'accessibilité.
 
@@ -19,13 +19,13 @@ Le site est construit pour offrir une expérience utilisateur optimale sur tous 
 - **Language**: JavaScript (ES6+)
 
 ### Backend (optionnel)
-- **Base de données**: MongoDB 7
-- **ODM**: Mongoose (si nécessaire)
+- **Base de données**: MongoDB 7 (au besoin)
 
 ### Développement
 - **Containerisation**: Docker (Node.js 20 Alpine)
 - **Package Manager**: npm
-- **Déploiement**: Vercel (recommandé)
+- **Build**: Docker + Local
+- **Déploiement**: Vercel 
 
 ---
 
@@ -42,6 +42,7 @@ Le site est construit pour offrir une expérience utilisateur optimale sur tous 
 | **Texte** | #1E293B | Contenu textuel |
 
 ### Typographie
+
 - **Titres**: System UI / Police sans-serif moderne
 - **Corps**: Police lisible optimisée pour le web
 - **Hiérarchie**: Scale typographique cohérente
