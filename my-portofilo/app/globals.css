@@ -1,10 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+
+/* Global Styles */
 
 :root {
   --foreground-rgb: 30, 41, 59;
-  --background: #f8e5ce;
+  --background: #f8e5ceff; /* Crème pêche */
+  --color-primary: #334155; /* Gris ardoise */
+  --color-secondary: #DC2626; /* Orange pêche */
+  --color-accent: #6E5B96; /* Lavande */
+  --color-text: #1E293B; /* Texte principal */
 }
 
 body {
