@@ -7,14 +7,11 @@
   --color-accent: #FB923C;
   --color-text: #1E293B;
   --color-background: #F8E5CE;
-  
-  /* Vous pouvez aussi définir --foreground-rgb ici si nécessaire */
+  --foreground-rgb: 30, 41, 59;
 }
 
 /* Global Styles */
-:root {
-  --foreground-rgb: 30, 41, 59;
-}
+
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -42,7 +39,7 @@ h3 {
 }
 
 a {
-  color: var(--color-secondary);
+  color: var(--color-background);
   text-decoration: none;
 }
 
@@ -57,7 +54,7 @@ p {
 }
 
 button {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
   color: white;
   border: none;
   padding: 0.5rem 1rem;

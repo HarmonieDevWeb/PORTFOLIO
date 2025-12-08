@@ -1,16 +1,115 @@
-import "tailwindcss";
-import "../app/globals.css";
-import { GiHamburgerMenu } from "react-icons/gi";
+"use client";
 
+import { useState, useEffect } from 'react';
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
+import "../app/globals.css";
 
 export default function Header() {
-    return (
-        <header className="py-4 shadow-md bg-primary"> 
-            <div className="container mx-auto flex justify-between items-center">
-                <img src="images/badge-logo-icon.svg" alt="Logo" className="h-10 w-10 ml-5"/>
-                <GiHamburgerMenu className="text-white mr-5"/>
-            </div>
-        </header>
-    );
+    const [isOpen, setIsOpen] = useState(false);
+    const [scroll, setScroll] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setScroll(true);
+            } else {
+                setScroll(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }; 
+    }, []);
+
+      const navItems = [
+    { name: 'Accueil', href: '#home' },
+    { name: 'À propos', href: '#about' },
+    { name: 'Compétences', href: '#skills' },
+    { name: 'Expérience', href: '#experience' },
+    { name: 'Projets', href: '#projects' },
+    { name: 'Contact', href: '#contact' }
+  ];
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+
+return (
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
+        scroll ? 'shadow-lg bg-primary' : 'shadow-md bg-primary'
+      }`}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <a href="#home">
+            <img 
+              src="/images/badge-logo-icon.svg" 
+              alt="Logo" 
+              className="h-10 w-10 hover:scale-110 transition-transform duration-300"
+            />
+          </a>
+
+          {/* Navigation Desktop */}
+          <nav className="hidden md:flex md:items-center md:space-x-8">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-white hover:text-secondary font-medium transition-colors relative group"
+              >
+                {item.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
+          </nav>
+
+          {/* Bouton Burger Menu (Mobile) */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-white hover:text-secondary transition-colors p-2"
+            aria-label="Menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? (
+              <IoClose className="text-3xl" />
+            ) : (
+              <GiHamburgerMenu className="text-3xl" />
+            )}
+          </button>
+        </div>
+
+        {/* Menu Mobile */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <nav className="py-4 space-y-1 border-t border-white/20 mt-4">
+            {navItems.map((item, index) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-3 text-white hover:text-secondary hover:bg-white/10 rounded-lg font-medium transition-all transform hover:translate-x-1"
+                style={{
+                  transitionDelay: isOpen ? `${index * 50}ms` : '0ms'
+                }}
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
 }
+
+
 

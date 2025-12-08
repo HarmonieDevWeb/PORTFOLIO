@@ -1,13 +1,12 @@
-import Header from '@/components/Header'
 import "./globals.css";
 
 
   export default function Home() {
   return (
     <div className="min-h-screen">
-      <Header />
 
       <main className="container mx-auto px-4 py-16 ">
+
 
         <section id="introduction" className="mb-20 flex flex-col items-center">
           <img src="images/badge-logo-peach.svg" alt="Logo" className="h-50 w-50 justify-center"/>

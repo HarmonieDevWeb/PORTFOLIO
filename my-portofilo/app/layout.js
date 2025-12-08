@@ -1,4 +1,5 @@
 import "./globals.css";
+import Header from '@/components/Header';
 
 export const metadata = {
   title: "Portfolio - Harmonie Chevrel",
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
     <link rel="icon" href="/badge-logo-icon.svg" />
 </head>
       <body className="antialiased ">
+        <Header />
         {children}
       </body>
     </html>
