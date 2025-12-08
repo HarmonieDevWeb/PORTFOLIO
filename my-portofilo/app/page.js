@@ -1,3 +1,4 @@
+"use client";
 import "./globals.css";
 import { FaAngleDoubleDown, FaGithub } from "react-icons/fa";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
@@ -60,7 +61,12 @@ export default function Home() {
 
           </div>
 
-        <button href="#about" className="bg-transparent border-none flex flex-col items-center mt-10 animate-bounce">
+        <button 
+          onClick={() => {
+            const aboutSection = document.getElementById('about');
+              aboutSection.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="bg-transparent border-none flex flex-col items-center mt-10 animate-bounce">
           <FaAngleDoubleDown className="mt-10 animate-bounce text-secondary text-4xl" />
           </button>
         </section>
