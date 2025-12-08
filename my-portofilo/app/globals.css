@@ -1,20 +1,19 @@
 @import "tailwindcss";
 
 
-/* Global Styles */
+@theme {
+  --color-primary: #334155;
+  --color-secondary: #6E5B96;
+  --color-accent: #FB923C;
+  --color-text: #1E293B;
+  --color-background: #F8E5CE;
+  
+  /* Vous pouvez aussi définir --foreground-rgb ici si nécessaire */
+}
 
+/* Global Styles */
 :root {
   --foreground-rgb: 30, 41, 59;
-  --background: #F8E5CE;
-  /* Crème pêche */
-  --color-primary: #334155;
-  /* Gris ardoise */
-  --color-secondary: #6E5B96;
-  /* Lavande */
-  --color-accent: #FB923C;
-  /* Orange pêche */
-  --color-text: #1E293B;
-  /* Texte principal */
 }
 
 body {
@@ -24,8 +23,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  align-content: center;
-  justify-content: center;
+  background-color: var(--color-background);
 }
 
 h1 {
