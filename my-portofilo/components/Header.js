@@ -28,7 +28,6 @@ export default function Header() {
     { name: 'Accueil', href: '#home' },
     { name: 'À propos', href: '#about' },
     { name: 'Compétences', href: '#skills' },
-    { name: 'Expérience', href: '#experience' },
     { name: 'Projets', href: '#projects' },
     { name: 'Contact', href: '#contact' }
   ];

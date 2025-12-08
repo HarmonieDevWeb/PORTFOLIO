@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return (
+ return (
     <html lang="fr">
       <head>
     <link rel="icon" href="/badge-logo-icon.svg" />
