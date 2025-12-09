@@ -4,7 +4,7 @@
 
 Site portfolio/CV moderne et responsive conçu avec une approche **mobile-first**. 
 
-Ce projet met en avant mes compétences en développement web et mon apprendtissage en auto didacte de Rezà travers une interface élégante et performante.
+Ce projet met en avant mes compétences en développement web et mon apprendtissage en auto didacte de React travers une interface élégante et performante.
 
 Le site est construit pour offrir une expérience utilisateur optimale sur tous les appareils, du smartphone au desktop, avec un accent particulier sur les performances et l'accessibilité.
 
