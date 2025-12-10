@@ -89,22 +89,25 @@ export default function Home() {
 
         {/* SKILLS */}
         <section id="skills" className="mb-16">
-          <h3 className="text-3xl font-bold mb-4">
+          <h3 className="text-3xl font-bold italic relative inline-block mb-4">
             Mes Compétences
+            <span className="block h-1 w-20 bg-accent mt-2"></span>
           </h3>
         </section>
 
         {/* PROJECTS */}
         <section id="projects" className="mb-16">
-          <h3 className="text-3xl font-bold mb-4">
+          <h3 className="text-3xl font-bold italic relative inline-block mb-4">
             Mes Projets
+            <span className="block h-1 w-20 bg-accent mt-2"></span>
           </h3>
         </section>
 
         {/* CONTACT */}
         <section id="contact">
-          <h3 className="text-3xl font-bold mb-4">
+          <h3 className="text-3xl font-bold italic relative inline-block mb-4">
             Me Contacter
+            <span className="block h-1 w-20 bg-accent mt-2"></span>
           </h3>
         </section>
 
