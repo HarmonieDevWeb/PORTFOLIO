@@ -38,6 +38,12 @@ h3 {
 
 }
 
+h4 {
+  color: var(--color-);
+  font-size: 1rem;
+  padding-left: 1rem;
+}
+
 a {
   text-decoration: none;
 }
@@ -59,6 +65,12 @@ button {
 
 button:hover {
   background-color: darken(var(--color-accent), 50%);
+}
+
+li{
+  font-style: italic;
+  font-size: 1rem;
+  padding-left: 1.5rem;
 }
 
 

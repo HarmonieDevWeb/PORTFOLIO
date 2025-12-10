@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from '@/components/Header';
 
+
 export const metadata = {
   title: "Portfolio - Harmonie Chevrel",
   description: "Portfolio de Harmonie Chevrel, développeuse web et mobile.",
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased ">
         <Header />
         {children}
+        
       </body>
     </html>
   );

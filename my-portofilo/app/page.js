@@ -1,7 +1,10 @@
 "use client";
 import "./globals.css";
-import { FaAngleDoubleDown, FaGithub } from "react-icons/fa";
-import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Skills from "@/components/Skills";
+import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
@@ -12,104 +15,23 @@ export default function Home() {
 
         <div className="max-w-5xl mx-auto px-10 py-4">
 
-        {/* HERO SECTION */}
-        <section className="mb-3 flex flex-col items-center bg-background w-full text-center">
+          {/* HERO SECTION */}
 
-          <img
-            src="images/badge-logo-peach.svg"
-            alt="Logo"
-            className="w-auto"
-          />
-
-          <h2 className="text-3xl font-bold mb-4">
-            Harmonie Chevrel
-          </h2>
-
-          <p className="px-12 text-accent uppercase font-bold">
-            Développeuse FullStack
-          </p>
-
-          <span className="text-text italic text-center mt-4 max-w-xl">
-            Animée par la curiosité et l’envie de comprendre l’envers du décor d’une page web,
-            j’ai entamé ma reconversion dans le développement web en 2025.
-            En constante évolution, je développe mes compétences à travers des projets personnels,
-            avec l’ambition de créer des applications utiles et accessibles au plus grand nombre.
-          </span>
+          <Hero />
 
 
-          <div className="buttonCta flex flex-row justify-center gap-4 mt-6">
 
-            {/* GITHUB */}
-            <a
-              href="https://github.com/HarmonieDevWeb"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-secondary text-white px-10 font-bold h-12 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition"
-            >
-              <FaGithub className="mr-2 text-4xl" />
-             GitHub
-            </a>
-
-            {/* CONTACT */}
-            <button
-               onClick={() => {
-            const aboutSection = document.getElementById('contact');
-              aboutSection.scrollIntoView({ behavior: 'smooth' });
-            }}
-              className="border-2 border-primary px-10 h-12 w-40 flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition"
-            >
-              <IoChatbubbleEllipsesSharp className="mr-2 text-2xl" />
-              Contact
-            </button>
-
-          </div>
-
-        <button 
-          onClick={() => {
-            const aboutSection = document.getElementById('about');
-              aboutSection.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="bg-transparent border-none flex flex-col items-center mt-10 animate-bounce">
-          <FaAngleDoubleDown className="mt-10 animate-bounce text-secondary text-4xl" />
-          </button>
-        </section>
-</div>
+        </div>
       </main>
 
       {/* ARTICLE SECTION  */}
       <div className=" bg-white w-full py-16 px-4">
 
-        {/* ABOUT */}
-        <section id="about" className="mb-16">
-          <h3 className="text-3xl font-bold italic relative inline-block mb-4">
-            À propos de moi
-            <span className="block h-1 w-20 bg-accent mt-2"></span>
-          </h3>
-        </section>
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
 
-        {/* SKILLS */}
-        <section id="skills" className="mb-16">
-          <h3 className="text-3xl font-bold italic relative inline-block mb-4">
-            Mes Compétences
-            <span className="block h-1 w-20 bg-accent mt-2"></span>
-          </h3>
-        </section>
-
-        {/* PROJECTS */}
-        <section id="projects" className="mb-16">
-          <h3 className="text-3xl font-bold italic relative inline-block mb-4">
-            Mes Projets
-            <span className="block h-1 w-20 bg-accent mt-2"></span>
-          </h3>
-        </section>
-
-        {/* CONTACT */}
-        <section id="contact">
-          <h3 className="text-3xl font-bold italic relative inline-block mb-4">
-            Me Contacter
-            <span className="block h-1 w-20 bg-accent mt-2"></span>
-          </h3>
-        </section>
 
       </div>
 
