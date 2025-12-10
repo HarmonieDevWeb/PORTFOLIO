@@ -5,10 +5,10 @@ import { FaAngleDoubleDown } from "react-icons/fa";
 export default function About() {
     return (
         <section id="about" className="mb-16">
-            <h3 className="text-3xl font-bold italic relative inline-block mb-5 mt-25">
+            <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
                 À propos de moi
                 <span className="block h-1 w-20 bg-accent mt-2"></span>
-            </h3>
+            </h2>
 
             <div className="mt-4 p-2 rounded-lg shadow-md border-l-6 border-secondary">
                 <h3 className="text-2xl font-semibold mb-2">Localisation</h3>

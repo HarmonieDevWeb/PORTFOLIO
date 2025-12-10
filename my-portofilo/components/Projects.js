@@ -52,7 +52,7 @@ export default function Projects() {
             "À venir": "bg-gray-500 text-white border-gray-700"
         };
 
-        const linkProject = {   
+        const linkProject = {
             link: project.link,
             linkGitHub: project.linkGitHub
         };
@@ -86,7 +86,7 @@ export default function Projects() {
                 </div>
 
                 {/* Button si Public */}
-                {isPublic && (  
+                {isPublic && (
                     <div className="mt-4 flex space-x-4 justify-center-safe">
                         <a
                             href={project.link}
@@ -119,12 +119,13 @@ export default function Projects() {
     };
 
     return (
-        <section id="projects" className="w-full px-6 py-12 flex flex-wrap flex-col items-center">
+        <section id="projects" className="mb-16">
+
+            <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
+                Mes Projets
+                <span className="block h-1 w-20 bg-accent mt-2 mx-auto rounded-full"></span>
+            </h2>
             <div className="max-w-4xl mx-auto text-center mt-5">
-                <h3 className="text-3xl font-bold mb-8 text-text">
-                    Mes Projets
-                    <span className="block h-1 w-20 bg-accent mt-2 mx-auto rounded-full"></span>
-                </h3>
                 <div className="space-y-8">
                     {projectsInfo.Projects.map((project, index) => (
                         <ProjectCard key={index} project={project} />
