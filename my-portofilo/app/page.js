@@ -44,20 +44,23 @@ export default function Home() {
               href="https://github.com/HarmonieDevWeb"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-secondary text-white px-12 font-bold h-12 flex items-center justify-center rounded-full hover:bg-opacity-90 transition"
+              className="bg-secondary text-white px-10 font-bold h-12 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition"
             >
-              <FaGithub className="mr-2 text-2xl" />
-              Mon GitHub
+              <FaGithub className="mr-2 text-4xl" />
+             GitHub
             </a>
 
             {/* CONTACT */}
-            <a
-              href="#contact"
-              className="border-2 border-primary px-12 h-12 flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition"
+            <button
+               onClick={() => {
+            const aboutSection = document.getElementById('contact');
+              aboutSection.scrollIntoView({ behavior: 'smooth' });
+            }}
+              className="border-2 border-primary px-10 h-12 w-40 flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition"
             >
               <IoChatbubbleEllipsesSharp className="mr-2 text-2xl" />
               Contact
-            </a>
+            </button>
 
           </div>
 
