@@ -68,9 +68,9 @@ button:hover {
 }
 
 li{
-  font-style: italic;
   font-size: 1rem;
   padding-left: 1.5rem;
+  color: var(--color-primary)
 }
 
 
