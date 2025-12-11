@@ -52,10 +52,6 @@ export default function Projects() {
             "À venir": "bg-gray-500 text-white border-gray-700"
         };
 
-        const linkProject = {
-            link: project.link,
-            linkGitHub: project.linkGitHub
-        };
 
         return (
             <div className="mb-4 relative flex flex-col p-6 border border-gray-300 rounded-lg shadow-md w-full bg-white">
