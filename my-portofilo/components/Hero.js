@@ -35,7 +35,7 @@ export default function Hero() {
             Animée par la curiosité et l’envie de comprendre l’envers du décor d’une page web,
             j’ai entamé ma reconversion dans le développement web en 2025.
             En constante évolution, je développe mes compétences à travers des projets personnels,
-            avec l’ambition de créer des applications utiles et accessibles au plus grand nombre.
+            avec l’ambition de créer des applications utiles et accessibles au plus grand nombre dans l'avenir.
           </span>
 
 

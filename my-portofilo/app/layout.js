@@ -1,5 +1,6 @@
 import "./globals.css";
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 
 export const metadata = {
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased ">
         <Header />
         {children}
-        
+        <Footer />
       </body>
     </html>
   );
