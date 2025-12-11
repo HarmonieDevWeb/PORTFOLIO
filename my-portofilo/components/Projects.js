@@ -58,7 +58,7 @@ export default function Projects() {
         };
 
         return (
-            <div className="mb-4 relative flex flex-col p-6 border border-gray-300 rounded-lg shadow-md w-full max-w-2xl bg-white">
+            <div className="mb-4 relative flex flex-col p-6 border border-gray-300 rounded-lg shadow-md w-full bg-white">
                 <div className={`${isSecret ? 'blur-sm select-none' : ''} transition-all duration-300`}>
                     <img
                         src={project.image || "/images/badge-logo-icon.svg"}
@@ -119,11 +119,11 @@ export default function Projects() {
     };
 
     return (
-        <section id="projects" className="mb-16">
+        <section id="projects" className="mb-16 px-4 max-w-4xl mx-auto">
 
             <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
                 Mes Projets
-                <span className="block h-1 w-20 bg-accent mt-2 mx-auto rounded-full"></span>
+                <span className="block h-1 w-20 bg-accent mt-2"></span>
             </h2>
             <div className="max-w-4xl mx-auto text-center mt-5">
                 <div className="space-y-8">
