@@ -39,7 +39,8 @@ export default function Skills() {
         "SEO",
         "RGPD",
         "Cybersécurité",
-        "DRY"
+        "DRY",
+        "emailJS"
     ];
 
     const SkillBar = ({ name, level, status = "mastered" }) => {
