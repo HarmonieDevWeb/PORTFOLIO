@@ -28,7 +28,7 @@ export default function Hero() {
           <h2 className="text-2xl font-bold mb-2">
             Harmonie Chevrel
           </h2>
-          <p className="px-12 text-accent uppercase font-bold">
+          <p className="bg-white px-12 text-accent uppercase font-bold">
             Développeuse FullStack
           </p>
           <span className="text-text italic text-center max-w-xl mb-5">

@@ -61,7 +61,7 @@ export default function Projects() {
                         alt={project.name}
                         className="w-full h-48 object-cover mb-4 rounded"
                     />
-                    <h4 className="text-xl font-semibold mb-2 text-text">{project.name}</h4>
+                    <h1 className="text-1xl font-semibold mb-2 text-text">{project.name}</h1>
                     <p className="text-text mb-2">{project.content}</p>
                     <div className="flex space-x-2">
                     </div>
@@ -69,11 +69,11 @@ export default function Projects() {
 
                 {/* Badge Status - toujours visible */}
                 <div className={`${isSecret ? 'absolute top-0 right-0' : 'inline-block mt-2'}`}>
-                    <span className={`mr-2 px-2 py-1 text-sm font-medium rounded border ${levelProjects[project.Level]}`}>
+                    <span className={`mr-2 px-2 py-1 text-sm font-bold rounded border ${levelProjects[project.Level]}`}>
                         {project.Level}
                     </span>
                     <span
-                        className={`px-2 py-1 text-sm font-medium rounded border ${statusProjects[project.status]} ${isSecret ? 'cursor-pointer hover:opacity-20' : ''}`}
+                        className={`px-2 py-1 text-sm font-bold rounded border ${statusProjects[project.status]} ${isSecret ? 'cursor-pointer hover:opacity-20' : ''}`}
                         onClick={() => isSecret}
                         title={isSecret ? "Cacher" : ""}
                     >
@@ -88,17 +88,17 @@ export default function Projects() {
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className=" bg-primary text-white px-2 py-2 rounded-xl hover:bg-primary/80 transition"
+                            className=" bg-primary text-white font-bold px-2 py-2 rounded-xl hover:bg-primary/80 transition flex items-center gap-2" 
                         >
-                            <TbWorldWww className="text-4xl" />
+                           Voir le site <TbWorldWww className="text-4xl" />
                         </a>
                         <a
                             href={project.linkGitHub}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className=" bg-primary text-white px-2 py-2 rounded-xl hover:bg-primary/80 transition"
+                            className=" bg-primary text-white font-bold px-2 py-2 rounded-xl hover:bg-primary/80 transition flex items-center gap-2"
                         >
-                            <FaGithub className="text-4xl" />
+                           Voir le Github <FaGithub className="text-4xl" />
                         </a>
                     </div>
                 )}
