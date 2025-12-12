@@ -27,7 +27,7 @@ export async function GET(request) {
     
     return NextResponse.json({ 
       success: true, 
-      data: projects,
+      projects,
       count: projects.length 
     });
   } catch (error) {
