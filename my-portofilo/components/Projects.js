@@ -43,7 +43,6 @@ export default function Projects() {
         const statusProjects = {
             Public: "bg-accent text-white border-gray-700",
             Privé: "bg-accent text-white border-gray-700",
-            Secret: "bg-secondary text-white border-gray-700"
         };
 
         const levelProjects = {
@@ -53,18 +52,29 @@ export default function Projects() {
         };
 
 
-        return (
+return (
             <div className="mb-4 relative flex flex-col p-6 border border-gray-300 rounded-lg shadow-md w-full bg-white">
-                <div className={`${isSecret ? 'blur-sm select-none' : ''} transition-all duration-300`}>
-                    <img
-                        src={project.image || "/images/badge-logo-icon.svg"}
-                        alt={project.name}
-                        className="w-full h-48 object-cover mb-4 rounded"
-                    />
-                    <h1 className="text-1xl font-semibold mb-2 text-text">{project.name}</h1>
-                    <p className="text-text mb-2">{project.content}</p>
-                    <div className="flex space-x-2">
+                <div className="transition-all duration-300">
+                    <div className="relative">
+                        <img
+                            src={isSecret ? "/images/badge-logo-icon.svg" : (project.image || "/images/badge-logo-icon.svg")}
+                            alt={isSecret ? "Projet secret" : project.name}
+                            className={`w-full h-48 object-cover mb-4 rounded ${isSecret ? 'blur-lg' : ''}`}
+                        />
+                        {isSecret && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-white text-2xl font-bold bg-black/50 px-4 py-2 rounded">Futur Projet</span>
+                            </div>
+                        )}
                     </div>
+                    {!isSecret && (
+                        <>
+                            <h1 className="text-1xl font-semibold mb-2 text-text">{project.name}</h1>
+                            <p className="text-text mb-2">{project.content}</p>
+                            <div className="flex space-x-2">
+                            </div>
+                        </>
+                    )}
                 </div>
 
                 {/* Badge Status - toujours visible */}
