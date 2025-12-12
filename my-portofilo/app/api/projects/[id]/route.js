@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Project from '@/lib/models/Projects';
+import projectSchema from '@/lib/models/Projects';
 
 // GET - ONE PROJECT
 export async function GET(request, { params }) {
   try {
     await connectDB();
-    const project = await Project.findById(params.id);
+    const project = await projectSchema.findById(params.id);
     
     if (!project) {
       return NextResponse.json(
@@ -31,7 +31,7 @@ export async function PUT(request, { params }) {
     await connectDB();
     const body = await request.json();
     
-    const project = await Project.findByIdAndUpdate(
+    const project = await projectSchema.findByIdAndUpdate(
       params.id,
       body,
       { new: true, runValidators: true }
@@ -62,7 +62,7 @@ export async function PUT(request, { params }) {
 export async function DELETE(request, { params }) {
   try {
     await connectDB();
-    const project = await Project.findByIdAndDelete(params.id);
+    const project = await projectSchema.findByIdAndDelete(params.id);
     
     if (!project) {
       return NextResponse.json(

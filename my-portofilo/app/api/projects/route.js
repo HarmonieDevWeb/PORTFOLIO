@@ -1,6 +1,5 @@
 {/* https://mongoosejs.com/docs/nextjs.html */}
 
-
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Project from '@/lib/models/Projects';

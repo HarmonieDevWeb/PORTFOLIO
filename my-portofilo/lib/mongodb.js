@@ -1,30 +1,23 @@
-import { MongoClient } from 'mongodb'
+import mongoose from 'mongoose';
 
-// URI de connexion MongoDB
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/my-portfolio'
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// Options de connexion
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+if (!MONGODB_URI) {
+  throw new Error("Veuillez définir MONGODB_URI dans votre fichier .env local");
 }
 
-let client
-let clientPromise
+/* 
+ * Mise en cache pour éviter plusieurs connexions lors du hot reload
+ */
+let isConnected = null;
 
-if (process.env.NODE_ENV === 'development') {
-  // En développement, utiliser une variable globale pour éviter
-  // de créer trop de connexions lors du Hot Reload
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    global._mongoClientPromise = client.connect()
+export default async function connectDB() {
+  if (isConnected) {
+    return;
   }
-  clientPromise = global._mongoClientPromise
-} else {
-  // En production, créer une nouvelle connexion
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
-}
 
-// Exporter la promesse de connexion
-export default clientPromise
+  const db = await mongoose.connect(MONGODB_URI);
+  isConnected = db.connections[0].readyState;
+
+  console.log("💾 MongoDB connecté :", isConnected === 1 ? "OK" : "FAIL");
+}
