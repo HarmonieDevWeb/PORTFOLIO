@@ -50,9 +50,9 @@ export default function Projects() {
         };
 
         const levelProjects = {
-            Terminé: "bg-primary text-white border-red-700",
-            "En cours": "bg-primary text-white border-green-500",
-            "À venir": "bg-gray-500 text-white border-gray-700"
+            Terminé: "bg-primary text-white border-green-700",
+            "En cours": "bg-primary text-white border-orange-700",
+            "À venir": "bg-gray-500 text-white border-blue-700"
         };
 
 
@@ -101,15 +101,15 @@ return (
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className=" bg-primary text-white  font-bold px-2 py-2 rounded-xl hover:bg-primary/80 transition flex items-center gap-2" 
+                            className=" bg-primary text-white px-10 font-bold h-12 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition gap-2" 
                         >
-                            Web Site <TbWorldWww className="text-4xl" />
+                            Site <TbWorldWww className="text-4xl" />
                         </a>
                         <a
                             href={project.linkGitHub}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className=" bg-primary text-white font-bold px-2 py-2 rounded-xl hover:bg-primary/80 transition flex items-center gap-2"
+                            className="bg-secondary text-white px-10 font-bold h-12 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition gap-2"
                         >
                            Github <FaGithub className="text-4xl" />
                         </a>
