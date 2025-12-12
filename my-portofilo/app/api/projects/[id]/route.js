@@ -1,36 +1,23 @@
-// app/api/projects/route.js
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Project from '@/lib/models/Project';
 
-// GET PROJECT
-export async function GET(request) {
+// GET - ONE PROJECT
+export async function GET(request, { params }) {
   try {
     await connectDB();
+    const project = await Project.findById(params.id);
     
-    const { searchParams } = new URL(request.url);
-    const level = searchParams.get('level');
-    const status = searchParams.get('status');
-    
-    let query = { visibility: true };
-    
-    if (level) {
-      query.level = level;
+    if (!project) {
+      return NextResponse.json(
+        { success: false, error: 'Projet non trouvé' },
+        { status: 404 }
+      );
     }
     
-    if (status) {
-      query.status = status;
-    }
-    
-    const projects = await Project.find(query).sort({ order: 1, createdAt: -1 });
-    
-    return NextResponse.json({ 
-      success: true, 
-      data: projects,
-      count: projects.length 
-    });
+    return NextResponse.json({ success: true, data: project });
   } catch (error) {
-    console.error('Erreur GET /api/projects:', error);
+    console.error('Erreur GET /api/projects/[id]:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -38,27 +25,92 @@ export async function GET(request) {
   }
 }
 
-// POST PROJECT
-export async function POST(request) {
+// PUT - ONE PROJECT
+export async function PUT(request, { params }) {
   try {
     await connectDB();
     const body = await request.json();
     
-    if (!body.name || !body.content) {
+    const project = await Project.findByIdAndUpdate(
+      params.id,
+      body,
+      { new: true, runValidators: true }
+    );
+    
+    if (!project) {
       return NextResponse.json(
-        { success: false, error: 'Le nom et la description sont requis' },
-        { status: 400 }
+        { success: false, error: 'Projet non trouvé' },
+        { status: 404 }
       );
     }
     
-    const project = await Project.create(body);
-    
-    return NextResponse.json(
-      { success: true, data: project, message: 'Projet créé avec succès' },
-      { status: 201 }
-    );
+    return NextResponse.json({ 
+      success: true, 
+      data: project,
+      message: 'Projet mis à jour avec succès'
+    });
   } catch (error) {
-    console.error('Erreur POST /api/projects:', error);
+    console.error('Erreur PUT /api/projects/[id]:', error);
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 400 }
+    );
+  }
+}
+
+// DELETE - ONE PROJECT
+export async function DELETE(request, { params }) {
+  try {
+    await connectDB();
+    const project = await Project.findByIdAndDelete(params.id);
+    
+    if (!project) {
+      return NextResponse.json(
+        { success: false, error: 'Projet non trouvé' },
+        { status: 404 }
+      );
+    }
+    
+    return NextResponse.json({ 
+      success: true, 
+      data: {},
+      message: 'Projet supprimé avec succès'
+    });
+  } catch (error) {
+    console.error('Erreur DELETE /api/projects/[id]:', error);
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+// PATCH - ONE PROJECT PARTIAL
+export async function PATCH(request, { params }) {
+  try {
+    await connectDB();
+    const body = await request.json();
+    
+    const project = await Project.findByIdAndUpdate(
+      params.id,
+      { $set: body },
+      { new: true }
+    );
+    
+    if (!project) {
+      return NextResponse.json(
+        { success: false, error: 'Projet non trouvé' },
+        { status: 404 }
+      );
+    }
+    
+    return NextResponse.json({ 
+      success: true, 
+      data: project,
+      message: 'Projet modifié avec succès'
+    });
+  } catch (error) {
+    console.error('Erreur PATCH /api/projects/[id]:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 400 }
