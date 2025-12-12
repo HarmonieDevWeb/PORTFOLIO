@@ -1,5 +1,5 @@
 {/* HERO */ }
-import { ChevronDown, Github, MessageCircleMore } from "lucide-react";
+import { ChevronsDown, Github, MessageCircleMore } from "lucide-react";
 
 
 export default function Hero() {
@@ -64,13 +64,13 @@ export default function Hero() {
 
           </div>
 
-          <button
-            onClick={handleScrollToAbout}
-            className="bg-transparent border-none flex flex-col items-center mx-auto mt-5 cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
-            aria-label="Faire défiler vers la section à propos"
-          >
-            <ChevronDown className="text-secondary text-4xl animate-bounce" />
-          </button>
+            <button
+                onClick={handleScrollToAbout}
+                className="bg-transparent border-none flex flex-col items-center mx-auto mt-5 cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                aria-label="Faire défiler vers la section projets"
+            >
+                <ChevronsDown className="text-secondary animate-bounce mt-10" size={50} />
+            </button>
         </section>
 
       );

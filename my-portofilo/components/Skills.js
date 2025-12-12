@@ -1,4 +1,4 @@
-import { FaAngleDoubleDown } from "react-icons/fa";
+import { ChevronsDown } from "lucide-react";
 
 export default function Skills() {
     const skillsData = {
@@ -156,7 +156,7 @@ export default function Skills() {
                 className="bg-transparent border-none flex flex-col items-center mx-auto mt-5 cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                 aria-label="Faire défiler vers la section projets"
             >
-                <FaAngleDoubleDown className="text-secondary text-4xl animate-bounce" />
+                <ChevronsDown className="text-secondary animate-bounce" size={50} />
             </button>
         </section>
     );

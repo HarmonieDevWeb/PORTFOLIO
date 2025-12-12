@@ -1,4 +1,4 @@
-import { EyeClosed, Github, ChevronDown, Globe  } from 'lucide-react';
+import { EyeClosed, Github, ChevronsDown, Globe  } from 'lucide-react';
 
 
 
@@ -145,7 +145,7 @@ return (
                 className="bg-transparent border-none flex flex-col items-center mx-auto mt-12 cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
                 aria-label="Faire défiler vers la section contact"
             >
-                <ChevronDown className="text-secondary text-4xl animate-bounce" />
+                <ChevronsDown className="text-secondary animate-bounce" size={50}  />
             </button>
         </section>
     );
