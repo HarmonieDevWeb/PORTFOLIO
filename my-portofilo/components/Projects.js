@@ -9,6 +9,7 @@ export default function Projects() {
             {
                 name: "SKILLFUSION",
                 content: "Plateforme DIY & BRICO - Projet Soutenance Titre DWWM",
+                stack:["Node.js", "Express","SvelteKit", "PostgreSQL", "Sequelize"],
                 created_at:"Octobre 2025",
                 level: "Terminé",
                 status: "Privé",
@@ -19,6 +20,7 @@ export default function Projects() {
             {
                 name: "PORTOFILO",
                 content: "Mon site web personnel pour présenter mes compétences, projets et expériences en développement web.",
+                stack:["React.js", "Next.js","Tailwind"],
                 created_at:"Décembre 2025",
                 level: "En cours",
                 status: "Public",
