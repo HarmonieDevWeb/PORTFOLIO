@@ -1,41 +1,44 @@
+import { useState, useEffect } from 'react';
 import { EyeClosed, Github, ChevronsDown, Globe  } from 'lucide-react';
 
+// Etat du composant
 export default function Projects() {
-    const projectsInfo = {
-        Projects: [
-            {
-                name: "SKILLFUSION",
-                content: "Plateforme DIY & BRICO - Projet Soutenance Titre DWWM",
-                stack:["Node.js", "Express","SvelteKit", "PostgreSQL", "Sequelize"],
-                created_at:"Octobre 2025",
-                level: "Terminé",
-                status: "Privé",
-                link: "",
-                linkGitHub: "",
-                image: "https://i.postimg.cc/5NgQ5ctD/Capture-d-ecran-du-2025-10-21-13-33-41.png"
-            },
-            {
-                name: "PORTOFILO",
-                content: "Mon site web personnel pour présenter mes compétences, projets et expériences en développement web.",
-                stack:["React.js", "Next.js","Tailwind"],
-                created_at:"Décembre 2025",
-                level: "En cours",
-                status: "Public",
-                link: "",
-                linkGitHub: "https://github.com/HarmonieDevWeb/PORTOFILO/tree/Dev/my-portofilo",
-                image: "https://i.postimg.cc/L8h5znwv/Capture-d-ecran-du-2025-12-10-17-35-06.png"
-            },
-            {
-                name: "Capsule Temporelle",
-                content: "Application web pour créer et envoyer des capsules temporelles numériques à soi-même ou à d'autres personnes.",
-                created_at:"Prévu pour 2026",
-                level: "À venir",
-                status: "Secret",
-                link: "",
-                linkGitHub: "",
-                image: ""
+    const [projects, setProjects] = useState([]); // les données
+    const [loading, setLoading] = useState(true); // le chargement
+    const [error, setError] = useState(false); // les erreurs
+
+// Effet au chargement
+    useEffect(() => {
+        fetchProjects();
+    }, []);
+
+// Récupération des projets
+
+    const fetchProjects = async () => {
+        try{
+            // chargement et reset erreurs
+            setLoading(true);
+            setError(null); 
+        
+            // API Next
+            const res = await fetch("/api/projects");
+        
+            // Controle de la requete
+            if(!res.ok){
+                throw new Error("Erreur lors du chargement des projets.");
             }
-        ]
+        
+            // Conversion Json
+            const data = await res.json();
+        
+            // MAJ affichage projets
+            setProjects(data.projects|| []);
+        }catch (err) {
+            console.error("erreur:", err);
+            setError(err.message);
+        }finally {
+            setLoading(false); // Annulation du chargement que ce soit succes ou error
+        }
     };
 
     const ProjectCard = ({ project }) => {
