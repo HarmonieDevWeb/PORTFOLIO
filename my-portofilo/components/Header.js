@@ -1,7 +1,7 @@
 "use client";
-{/*https://www.npmjs.com/package/react-scroll*/}
-import { Link } from 'react-scroll'; 
-{/*https://react.dev/reference/react/hooks*/}
+{/*https://www.npmjs.com/package/react-scroll*/ }
+import { Link } from 'react-scroll';
+{/*https://react.dev/reference/react/hooks*/ }
 import { useState, useEffect } from 'react';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
@@ -36,19 +36,19 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
-        scroll ? 'shadow-lg bg-primary' : 'shadow-md bg-primary'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-20 transition-all duration-300 ${scroll ? 'py-2 shadow-lg bg-primary' : 'py-4 md:py-6 shadow-md bg-primary'
+        }`}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-3 md:px-5 lg:px-7 max-w-8xl">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="home" smooth={true} duration={500}>
             <img
               src="/images/badge-logo-icon.svg"
-              alt="Logo"
-              className="h-10 w-10 hover:scale-110 transition-transform duration-300"
+              alt="Logo - Retour en haut de page"
+              className="h-10 w-10 md:h-20 md:w-30 hover:scale-110 transition-transform duration-300"
             />
+
           </Link>
           {/* Navigation Desktop */}
           <nav className="hidden md:flex space-x-8">
@@ -81,27 +81,24 @@ export default function Header() {
         </div>
         {/* Menu Mobile */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          }`}
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            }`}
         >
-          <nav className="py-4 space-y-1 border-t border-white/20 mt-4">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                smooth={true}
-                duration={500}
-                onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 text-white hover:text-secondary hover:bg-white/10 rounded-lg font-medium transition-all transform hover:translate-x-1"
-                style={{
-                  transitionDelay: isOpen ? `${index * 50}ms` : '0ms'
-                }}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+<nav className="hidden md:flex">
+  {navItems.map((item) => (
+    <Link
+      key={item.name}
+      to={item.href}
+      smooth={true}
+      duration={500}
+      className="text-white hover:text-secondary font-medium text-lg md:text-xl transition-colors relative group px-3 py-2"
+    >
+      {item.name}
+      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
+    </Link>
+  ))}
+</nav>
+
         </div>
       </div>
     </header>

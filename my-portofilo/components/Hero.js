@@ -19,7 +19,7 @@ export default function Hero() {
     }
 
       return (
-        <section className="mt-3 flex flex-col items-center bg-background w-full text-center">
+        <section className="mt-6 lg:mt-10 flex flex-col items-center bg-background w-full text-center">
           <img
             src="images/badge-logo-peach.svg"
             alt="Logo"
