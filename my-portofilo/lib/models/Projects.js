@@ -15,17 +15,17 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true
   }],
-  created_at: {
+  create: {
     type: String,
     required: true
   },
-  level: {
+  status: {
     type: String,
     required: true,
     enum: ['Terminé', 'En cours', 'À venir'],
     default: 'En cours'
   },
-  status: {
+  state: {
     type: String,
     required: true,
     enum: ['Public', 'Privé', 'Secret'],
@@ -33,15 +33,15 @@ const projectSchema = new mongoose.Schema({
   },
   link: {
     type: String,
-    default: ''
+    default: '',
   },
   linkGitHub: {
     type: String,
-    default: ''
+    default: '',
   },
   image: {
     type: String,
-    default: ''
+    default: '',
   },
   order: {
     type: Number,

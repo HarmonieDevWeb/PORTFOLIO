@@ -11,21 +11,17 @@ dotenv.config({ path: ".env.local" });
 
 const projectSchema = new mongoose.Schema(
   {
-    title: String,
-    description: String,
-    longDescription: String,
-    technologies: [String],
-    images: [{ url: String, alt: String }],
-    thumbnail: String,
-    githubUrl: String,
-    liveUrl: String,
-    category: String,
-    featured: Boolean,
+    name: String,
+    content: String,
+    stack: [String],
+    create: String,
     status: String,
-    startDate: Date,
-    endDate: Date,
+    state: String,
+    link: String,
+    linkGitHub: String,
+    images: String,
     order: Number,
-    visibility: Boolean,
+    visibility: Boolean
   },
   { timestamps: true }
 );
@@ -39,7 +35,7 @@ const skillSchema = new mongoose.Schema(
     experience: { years: Number, months: Number },
     icon: String,
     color: String,
-    description: String,
+    website : String,
     order: Number,
     visibility: Boolean,
   },
@@ -50,10 +46,8 @@ const toolSchema = new mongoose.Schema(
   {
     name: String,
     category: String,
-    proficiency: Number,
     icon: String,
     website: String,
-    description: String,
     usedFor: [String],
     order: Number,
     visibility: Boolean,
@@ -64,11 +58,10 @@ const toolSchema = new mongoose.Schema(
 const methodSchema = new mongoose.Schema(
   {
     name: String,
-    type: String,
-    description: String,
+    category: String,
     icon: String,
-    practices: [{ name: String, description: String }],
-    benefits: [String],
+    website: String,
+    usedFor: [String],
     order: Number,
     visibility: Boolean,
   },
@@ -89,54 +82,48 @@ const Method = mongoose.models.Method || mongoose.model("Method", methodSchema);
 
 const projectsData = [
   {
-    title: "SKILLFUSION",
-    description: "Plateforme DIY & BRICO - Projet de soutenance Titre DWWM",
-    longDescription: "Plateforme complète orientée bricolage et DIY, permettant la consultation, la création et le partage de projets entre utilisateurs.",
-    technologies: ["Node.js", "Express", "SvelteKit", "PostgreSQL", "Sequelize"],
-    thumbnail: "https://i.postimg.cc/5NgQ5ctD/Capture-d-ecran-du-2025-10-21-13-33-41.png",
-    githubUrl: "",
-    liveUrl: "",
-    category: "web",
-    featured: true,
-    status: "terminé",
-    startDate: new Date("2025-10-01"),
-    endDate: new Date("2025-10-31"),
+    name: "SKILLFUSION",
+    content: "Plateforme DIY & BRICO - Projet de soutenance Titre DWWM",
+    stack: ["Node.js", "Express", "SvelteKit", "PostgreSQL", "Sequelize"],
+    create: "Septembre 2025",
+    state: "Privé",
+    status: "Terminé",
+    link: "",
+    linkGitHub: "",
+    image: "https://i.postimg.cc/5NgQ5ctD/Capture-d-ecran-du-2025-10-21-13-33-41.png",
     order: 1,
     visibility: true
   },
 
   {
-    title: "PORTOFILO",
-    description: "Mon site web personnel pour présenter mes compétences, projets et expériences.",
-    longDescription: "Portfolio moderne développé avec Next.js, React et Tailwind, permettant la visualisation de mes projets, compétences et informations professionnelles.",
-    technologies: ["React.js", "Next.js", "Tailwind"],
-    thumbnail: "https://i.postimg.cc/L8h5znwv/Capture-d-ecran-du-2025-12-10-17-35-06.png",
-    githubUrl: "https://github.com/HarmonieDevWeb/PORTOFILO/tree/Dev/my-portofilo",
-    liveUrl: "",
-    category: "web",
-    featured: true,
-    status: "en-cours",
-    startDate: new Date("2025-12-01"),
+    name: "PORTOFILO",
+    content: "Mon site web personnel pour présenter mes compétences, projets et expériences.",
+    stack: ["React.js", "Next.js", "Tailwind"],
+    create: "Décembre 2025",
+    state: "Public",
+    status: "En cours",
+    link: "",
+    linkGitHub: "https://github.com/HarmonieDevWeb/PORTOFILO/tree/Dev/my-portofilo",
+    image: "https://i.postimg.cc/L8h5znwv/Capture-d-ecran-du-2025-12-10-17-35-06.png",
     order: 2,
     visibility: true
   },
 
   {
-    title: "Capsule Temporelle",
-    description: "Application web pour créer et envoyer des capsules temporelles numériques.",
-    longDescription: "Projet futur permettant aux utilisateurs d'envoyer un message dans le futur, avec stockage sécurisé et libération programmée.",
-    technologies: [],
-    thumbnail: "",
-    githubUrl: "",
-    liveUrl: "",
-    category: "web",
-    featured: false,
-    status: "à-venir",
-    startDate: new Date("2026-01-01"),
+    name: "Capsule Temporelle",
+    content: "Application web pour créer et envoyer des capsules temporelles numériques.",
+    stack: [],
+    create: "Début 2026",
+    state: "Secret",
+    status: "À venir",
+    link: "",
+    linkGitHub: "",
+    image: "",
     order: 3,
     visibility: true
   }
 ];
+
 
 const skillsData = [/* ... identique ... */];
 const toolsData = [/* ... identique ... */];

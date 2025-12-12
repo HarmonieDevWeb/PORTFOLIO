@@ -1,7 +1,8 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Configuration Next.js
+  images: {
+    domains: ['cdn.exemple.com', 'autre-domaine.com'],
+  },
 };
 
 export default nextConfig;

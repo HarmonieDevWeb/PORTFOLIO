@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import Image from "next/image";
 import { EyeClosed, Github, ChevronsDown, Globe, Loader, AlertCircle } from 'lucide-react';
 
-// Etat du composant
+// state du composant
 export default function Projects() {
     const [projects, setProjects] = useState([]); // les données
     const [loading, setLoading] = useState(true); // le chargement
@@ -45,18 +46,28 @@ export default function Projects() {
     // COMPOSANT CARD PROJECT
 
     const ProjectCard = ({ project }) => {
-        const isSecret = project.status === "Secret";
-        const isPublic = project.status === "Public";
+        const isSecret = project.state === "Secret";
+        const isPublic = project.state === "Public";
 
-        const statusProjects = {
+        const stateProjects = {
             Public: "bg-accent text-white border-gray-700",
             Privé: "bg-accent text-white border-gray-700",
+            Secret: "bg-accent text-white border-gray-700"
         };
 
-        const levelProjects = {
+        const statusProjects = {
             Terminé: "bg-primary text-white border-green-700",
             "En cours": "bg-primary text-white border-orange-700",
             "À venir": "bg-gray-500 text-white border-blue-700"
+        };
+        
+
+        const getProjectImage = (image) => {
+            if (!image) return "/images/badge-logo-icon.svg"; // fallback
+            // Si image commence par http ou https → URL externe
+            if (/^https?:\/\//i.test(image)) return image;
+            // Sinon c’est un fichier local dans /public/images/
+            return `/images/${image}`;
         };
 
 
@@ -64,11 +75,14 @@ export default function Projects() {
             <div className="mb-4 relative flex flex-col p-6 border border-gray-300 rounded-lg shadow-md w-full bg-white">
                 <div className="transition-all duration-300">
                     <div className={`relative max-h-80 overflow-hidden ${isSecret ? 'mb-30' : ''}`}>
-                        <img
-                            src={isSecret ? "/images/badge-logo-icon.svg" : (project.image || "/images/badge-logo-icon.svg")}
-                            alt={isSecret ? "Image projet secret" : "Image du projet"}
-                            className={`w-full object-cover mb-4 rounded h-48 md:h-64 lg:h-80 ${isSecret ? 'blur-lg' : ''}`}
-                        />
+                        <Image
+                            src={getProjectImage(project.image)}
+                            alt={project.state === "Secret" ? "Image projet secret" : "Image du projet"}
+                            width={600}
+                            height={400}
+                            className={`${project.state === "Secret" ? "blur-lg" : ""} rounded`}
+                            objectFit="cover"
+                        />                           
                         {isSecret && (
                             <div className="absolute inset-1 flex items-center justify-center">
                                 <span className="text-white text-2xl font-bold bg-black/50 px-4 py-2 rounded">       <EyeClosed size={50} /> </span>
@@ -81,13 +95,13 @@ export default function Projects() {
                             <p className="text-text mb-2 h-40 md:h-50 lg:h-65">{project.content}</p>
                         </>
                     )}
-                    <span className="text-sm text-gray-500">{project.created_at}</span>
+                    <span className="text-sm text-gray-500">{project.create}</span>
                 </div>
 
                 {/* Badge Status - toujours visible */}
                 <div className="inline-block mt-2">
-                    <span className={`mr-2 px-2 py-1 text-sm font-bold rounded border ${levelProjects[project.level]}`}>
-                        {project.level}
+                    <span className={`mr-2 px-2 py-1 text-sm font-bold rounded border ${stateProjects[project.state]}`}>
+                        {project.state}
                     </span>
                     <span
                         className={`px-2 py-1 text-sm font-bold rounded border ${statusProjects[project.status]} `}
@@ -149,23 +163,23 @@ export default function Projects() {
         )
     }
 
-        // RENDU SI ERROR
-            if (error) {
+    // RENDU SI ERROR
+    if (error) {
         return (
             <section id="projects" className="mb-16 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
-                 <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
+                <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
                     Mes Projets
                     <span className="block h-1 w-20 bg-accent mt-2"></span>
                 </h2>
                 <div className="flex flex-col justify-center items-center min-h-[400px] text-center">
                     {/* Icône d'alerte */}
                     <AlertCircle className="text-red-500 mb-4" size={48} />
-                    
+
                     {/* Message d'erreur */}
                     <p className="text-red-500 text-lg mb-4">{error}</p>
-                    
+
                     {/* Bouton pour réessayer le chargement */}
-                    <button 
+                    <button
                         onClick={fetchProjects} // Rappelle la fonction de récupération
                         className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-black transition"
                     >
@@ -180,11 +194,11 @@ export default function Projects() {
 
 
         <section id="projects" className="mb-16 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
-                  <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
-                    Mes Projets
-                    <span className="block h-1 w-20 bg-accent mt-2"></span>
-                </h2>
-            
+            <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
+                Mes Projets
+                <span className="block h-1 w-20 bg-accent mt-2"></span>
+            </h2>
+
             {/* GRILLE DE PROJETS OU MESSAGE VIDE */}
             {projects.length === 0 ? (
                 // Si aucun projet n'est disponible
@@ -197,7 +211,7 @@ export default function Projects() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
                         {/* Map sur le tableau projects pour créer une carte par projet */}
                         {projects.map((project) => (
-                            <ProjectCard 
+                            <ProjectCard
                                 key={project._id}  // _id de MongoDB comme clé unique
                                 project={project}   // Passe toutes les données du projet
                             />
@@ -205,7 +219,7 @@ export default function Projects() {
                     </div>
                 </div>
             )}
-            
+
             {/* BOUTON DE SCROLL VERS CONTACT */}
             <button
                 onClick={handleScrollToContact}
