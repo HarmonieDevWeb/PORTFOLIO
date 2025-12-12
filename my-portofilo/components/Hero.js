@@ -1,6 +1,6 @@
 {/* HERO */ }
-import { FaAngleDoubleDown, FaGithub } from "react-icons/fa";
-import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
+import { ChevronDown, Github, MessageCircleMore } from "lucide-react";
+
 
 export default function Hero() {
 
@@ -48,7 +48,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="bg-secondary text-white px-10 font-bold h-12 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition"
             >
-              <FaGithub className="mr-2 text-4xl" />
+              <Github className="mr-2 text-4xl" />
               GitHub
             </a>
 
@@ -58,7 +58,7 @@ export default function Hero() {
               aria-label="Faire défiler vers la section contact"
               className="border-2 border-primary px-10 h-12 w-40 flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition"
             >
-              <IoChatbubbleEllipsesSharp className="mr-2 text-2xl" />
+              <MessageCircleMore className="mr-2 text-2xl" />
               Contact
             </button>
 
@@ -69,7 +69,7 @@ export default function Hero() {
             className="bg-transparent border-none flex flex-col items-center mx-auto mt-5 cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
             aria-label="Faire défiler vers la section à propos"
           >
-            <FaAngleDoubleDown className="text-secondary text-4xl animate-bounce" />
+            <ChevronDown className="text-secondary text-4xl animate-bounce" />
           </button>
         </section>
 

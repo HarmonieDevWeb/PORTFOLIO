@@ -4,7 +4,7 @@
 
 import { useState, useRef } from 'react';
 import emailJS from '@emailjs/browser';
-import { EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MapPin, AtSign } from 'lucide-react';
 
 
 export default function Contact() {
@@ -67,13 +67,13 @@ export default function Contact() {
         {/* Informations de contact */}
         <div className="space-y-6">
           <div className="flex items-center space-x-4">
-            <EnvelopeIcon className="h-6 w-6 text-primary" />
+            <AtSign className="h-6 w-6 text-primary" />
             <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`} className="text-lg text-gray-700 hover:text-primary transition-colors">
               {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
             </a>
           </div>
           <div className="flex items-center space-x-4">
-            <MapPinIcon className="h-6 w-6 text-primary" />
+            <MapPin className="h-6 w-6 text-primary" />
             <span className="text-lg text-gray-700">Le Mans, France</span>
           </div>
         </div>

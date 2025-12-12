@@ -1,5 +1,5 @@
 {/* ABOUT */ }
-import { FaAngleDoubleDown } from "react-icons/fa";
+import { ChevronsDown } from 'lucide-react';
 
 
 export default function About() {
@@ -58,7 +58,7 @@ export default function About() {
                 }}
                 className="bg-transparent border-none flex flex-col items-center mx-auto mt-5 cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
                 aria-label="Faire défiler vers la section compétence"    >            
-                <FaAngleDoubleDown className="mt-20 animate-bounce text-secondary text-4xl" />
+                <ChevronsDown className="mt-20 animate-bounce text-secondary text-4xl" />
             </button>
 
         </section>

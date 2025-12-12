@@ -1,6 +1,5 @@
-import { FaAngleDoubleDown, FaGithub } from "react-icons/fa";
-import { EyeClosed } from 'lucide-react';
-import { TbWorldWww } from "react-icons/tb";
+import { EyeClosed, Github, ChevronDown, Globe  } from 'lucide-react';
+
 
 
 
@@ -103,7 +102,7 @@ return (
                             rel="noopener noreferrer"
                             className=" bg-primary text-white px-10 font-bold h-12 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition gap-2" 
                         >
-                            Site <TbWorldWww className="text-4xl" />
+                            Site <Globe className="text-4xl" />
                         </a>
                         <a
                             href={project.linkGitHub}
@@ -111,7 +110,7 @@ return (
                             rel="noopener noreferrer"
                             className="bg-secondary text-white px-10 font-bold h-12 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition gap-2"
                         >
-                           Github <FaGithub className="text-4xl" />
+                           Github <Github className="text-4xl" />
                         </a>
                     </div>
                 )}
@@ -146,7 +145,7 @@ return (
                 className="bg-transparent border-none flex flex-col items-center mx-auto mt-12 cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
                 aria-label="Faire défiler vers la section contact"
             >
-                <FaAngleDoubleDown className="text-secondary text-4xl animate-bounce" />
+                <ChevronDown className="text-secondary text-4xl animate-bounce" />
             </button>
         </section>
     );
