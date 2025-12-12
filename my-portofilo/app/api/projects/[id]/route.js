@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Project from '@/lib/models/Project';
+import Project from '@/lib/models/Projects';
 
 // GET - ONE PROJECT
 export async function GET(request, { params }) {
@@ -85,7 +85,7 @@ export async function DELETE(request, { params }) {
   }
 }
 
-// PATCH - ONE PROJECT PARTIAL
+// PATCH - ONE PROJECT
 export async function PATCH(request, { params }) {
   try {
     await connectDB();

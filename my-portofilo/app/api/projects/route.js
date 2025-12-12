@@ -3,7 +3,7 @@
 
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Project from '@/lib/models/Project';
+import Project from '@/lib/models/Projects';
 
 // GET PROJECT
 export async function GET(request) {
