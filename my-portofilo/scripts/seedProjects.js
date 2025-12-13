@@ -27,12 +27,12 @@ const projectSchema = new mongoose.Schema(
 );
 
 const skillSchema = new mongoose.Schema(
-  {
-    name: String,
-    category: String,
-    mastered: Boolean,
-    level: Number,
-  },
+{
+  name: String,
+  category: String,
+  level: Number,
+  status: String
+},
   { timestamps: true }
 );
 
@@ -94,7 +94,188 @@ const projectsData = [
 
 
 const skillsData = [
+ // ======================
+  // FRONTEND — ACQUIS
+  // ======================
+  {
+    name: "HTML5 / CSS3",
+    category: "Frontend",
+    level: 95,
+    status: "Acquis",
+  },
+  {
+    name: "JavaScript (ES6+)",
+    category: "Frontend",
+    level: 70,
+    status: "Acquis",
+  },
+  {
+    name: "Svelte / SvelteKit",
+    category: "Frontend",
+    level: 70,
+    status: "Acquis",
+  },
+  {
+    name: "CMS PocketBase",
+    category: "Frontend",
+    level: 70,
+    status: "Acquis",
+  },
 
+  // ======================
+  // BACKEND — ACQUIS
+  // ======================
+  {
+    name: "Node.js",
+    category: "Backend",
+    level: 70,
+    status: "Acquis",
+  },
+  {
+    name: "Express.js",
+    category: "Backend",
+    level: 70,
+    status: "Acquis",
+  },
+  {
+    name: "APIs RESTful",
+    category: "Backend",
+    level: 70,
+    status: "Acquis",
+  },
+  {
+    name: "PostgreSQL",
+    category: "Backend",
+    level: 80,
+    status: "Acquis",
+  },
+  {
+    name: "Sequelize",
+    category: "Backend",
+    level: 80,
+    status: "Acquis",
+  },
+
+  // ======================
+  // EN APPRENTISSAGE
+  // ======================
+  {
+    name: "React.js",
+    category: "Frontend",
+    level: 40,
+    status: "En apprentissage",
+  },
+  {
+    name: "Next.js",
+    category: "Frontend",
+    level: 40,
+    status: "En apprentissage",
+  },
+  {
+    name: "Tailwind CSS",
+    category: "Frontend",
+    level: 50,
+    status: "En apprentissage",
+  },
+
+  {
+    name: "MongoDB",
+    category: "Backend",
+    level: 60,
+    status: "En apprentissage",
+  },
+
+  // ======================
+  // TOOLS
+  // ======================
+  {
+    name: "Visual Studio Code",
+    category: "Tool",
+    level: 90,
+    status: "Acquis",
+  },
+  {
+    name: "Git & GitHub",
+    category: "Tool",
+    level: 85,
+    status: "Acquis",
+  },
+  {
+    name: "Thunder Client",
+    category: "Tool",
+    level: 75,
+    status: "Acquis",
+  },
+  {
+    name: "Jest",
+    category: "Tool",
+    level: 60,
+    status: "En apprentissage",
+  },
+    {
+    name: "Docker",
+    category: "Tool",
+    level: 30,
+    status: "En apprentissage",
+  },
+  {
+    name: "EmailJS",
+    category: "Tool",
+    level: 70,
+    status: "Acquis",
+  },
+
+  // ======================
+  // METHODS
+  // ======================
+  {
+    name: "Agile / Scrum",
+    category: "Method",
+    level: 70,
+    status: "Acquis",
+  },
+  {
+    name: "Méthodologie MERISE",
+    category: "Method",
+    level: 65,
+    status: "Acquis",
+  },
+  {
+    name: "Mobile First",
+    category: "Method",
+    level: 75,
+    status: "Acquis",
+  },
+  {
+    name: "A11Y",
+    category: "Method",
+    level: 60,
+    status: "Acquis",
+  },
+  {
+    name: "SEO",
+    category: "Method",
+    level: 65,
+    status: "En apprentissage",
+  },
+  {
+    name: "RGPD",
+    category: "Method",
+    level: 55,
+    status: "Acquis",
+  },
+  {
+    name: "Cybersécurité",
+    category: "Method",
+    level: 45,
+    status: "En apprentissage",
+  },
+  {
+    name: "DRY / Clean Code",
+    category: "Method",
+    level: 70,
+    status: "Acquis",
+  },
  
 ];
 
@@ -129,8 +310,7 @@ async function seedDatabase() {
     console.log(`💾 Ajouté :`);
     console.log(`   - ${projects.length} projets`);
     console.log(`   - ${skills.length} compétences`);
-    console.log(`   - ${tools.length} outils`);
-    console.log(`   - ${methods.length} méthodes`);
+
 
     console.log("🎉 Base seedée avec succès !");
   } catch (error) {

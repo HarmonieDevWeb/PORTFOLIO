@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from "next/image";
-import { EyeClosed, Github, ChevronsDown, Globe, Loader, AlertCircle } from 'lucide-react';
+import { EyeClosed, Github, ChevronsDown, Globe, Loader, AlertCircle, Linkedin } from 'lucide-react';
 
 // state du composant
 export default function Projects() {
@@ -73,7 +73,7 @@ export default function Projects() {
         return (
             <div className="mb-4 relative flex flex-col p-6 border border-gray-300 rounded-lg shadow-md w-full bg-white">
                 <div className="transition-all duration-300">
-                    <div className={`relative w-full h-40 overflow-hidden shadow-2xl ${isSecret ? 'mb-30' : ''}`}>
+                    <div className={`relative w-full h-60 overflow-hidden shadow-2xl ${isSecret ? 'mb-30' : ''}`}>
                         <Image
                             src={getProjectImage(project.image)}
                             alt={project.state === "Secret" ? "Image projet secret" : "Image du projet"}
@@ -82,10 +82,26 @@ export default function Projects() {
                         />
                         {isSecret && (
                             <div className="absolute inset-1 flex items-center justify-center">
-                                <span className="text-white text-2xl font-bold bg-black/50 px-4 py-2 rounded">       <EyeClosed size={50} /> </span>
+                                <span className="text-white text-2xl font-bold bg-black/50 px-4 py-2 rounded">
+                                    <EyeClosed size={50} /> </span>
                             </div>
                         )}
                     </div>
+                    {isSecret && (
+                        <div className='mb-20 flex flex-col items-center text-center'>
+                            <h1 className="text-1xl font-semibold mb-2 text-text">FUTUR PROJET</h1>
+                            <p className="text-text mb-40">à découvrir prochainement sur</p>
+                            <a
+                                href="https://fr.linkedin.com/in/harmonie-chevrel"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary hover:text-accent text-xs md:text-4xl transition-all duration-300 flex items-center gap-3 "
+                                aria-label="Lien vers mon profil LinkedIn"
+                            >
+                                LinkedIn <Linkedin size={30}/>
+                            </a>
+                        </div>
+                    )}
                     {!isSecret && (
                         <>
                             <h1 className="text-1xl font-semibold mb-2 text-text ">{project.name}</h1>
