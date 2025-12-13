@@ -1,6 +1,6 @@
 # Portfolio / CV - Harmonie
 
-## 📋 Description
+## Description
 
 Site portfolio/CV moderne et responsive conçu avec une approche **mobile-first**. 
 
@@ -10,7 +10,7 @@ Le site est construit pour offrir une expérience utilisateur optimale sur tous 
 
 ---
 
-## 🛠️ Stack Technique
+## Stack Technique
 
 ### Frontend
 - **Framework**: Next.js 15 (App Router)
@@ -18,40 +18,26 @@ Le site est construit pour offrir une expérience utilisateur optimale sur tous 
 - **Styling**: Tailwind CSS 4
 - **Language**: JavaScript (ES6+)
 
-### Backend (optionnel)
-- **Base de données**: MongoDB 7 (au besoin)
+### Backend 
+- **Base de données**: MongoDB Mongoose
+
+### Outils
+- **Gestion mails**: EmailJS
 
 ### Développement
 - **Containerisation**: Docker (Node.js 20 Alpine)
 - **Package Manager**: npm
 - **Build**: Docker + Local
-- **Déploiement**: Vercel 
+- **Déploiement**: Vercel
+- **Hebergeur**: O2Switch
 
----
-
-## 🎨 Direction Artistique
-
-### Palette de Couleurs
-
-| Couleur | Hex | Usage |
-|---------|-----|-------|
-| **Primaire** | #334155 | Navigation, titres, éléments principaux |
-| **Secondaire** | #FB923C | Accents, boutons, liens |
-| **Accent** | #A78BFA | Éléments interactifs, highlights |
-| **Background** | #F8E5CE | Fond principal, sections |
-| **Texte** | #1E293B | Contenu textuel |
-
-### Typographie
-
-- **Titres**: System UI / Police sans-serif moderne
-- **Corps**: Police lisible optimisée pour le web
-- **Hiérarchie**: Scale typographique cohérente
 
 ### Breakpoints (Mobile-First)
 
 - **Mobile**:  < 640px  (sm)
 - **Tablet**:  640px - 1024px (md/lg)
 - **Desktop**: > 1024px (xl/2xl)
+
 
 ### Principes de Design
 - **Mobile-First**: Conception pensée d'abord pour mobile
