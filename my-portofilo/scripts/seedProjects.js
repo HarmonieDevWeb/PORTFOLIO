@@ -30,54 +30,22 @@ const skillSchema = new mongoose.Schema(
   {
     name: String,
     category: String,
+    mastered: Boolean,
     level: Number,
-    levelLabel: String,
-    experience: { years: Number, months: Number },
-    icon: String,
-    color: String,
-    website : String,
-    order: Number,
-    visibility: Boolean,
   },
   { timestamps: true }
 );
 
-const toolSchema = new mongoose.Schema(
-  {
-    name: String,
-    category: String,
-    icon: String,
-    website: String,
-    usedFor: [String],
-    order: Number,
-    visibility: Boolean,
-  },
-  { timestamps: true }
-);
 
-const methodSchema = new mongoose.Schema(
-  {
-    name: String,
-    category: String,
-    icon: String,
-    website: String,
-    usedFor: [String],
-    order: Number,
-    visibility: Boolean,
-  },
-  { timestamps: true }
-);
 
 // -------------------------------
-// 🔥 MODELS (évite la recréation)
+// MODELS (évite la recréation)
 // -------------------------------
 const Project = mongoose.models.Project || mongoose.model("Project", projectSchema);
 const Skill = mongoose.models.Skill || mongoose.model("Skill", skillSchema);
-const Tool = mongoose.models.Tool || mongoose.model("Tool", toolSchema);
-const Method = mongoose.models.Method || mongoose.model("Method", methodSchema);
 
 // -------------------------------
-// 🔥 DATA
+// DATA
 // -------------------------------
 
 const projectsData = [
@@ -125,12 +93,14 @@ const projectsData = [
 ];
 
 
-const skillsData = [/* ... identique ... */];
-const toolsData = [/* ... identique ... */];
-const methodsData = [/* ... identique ... */];
+const skillsData = [
+
+ 
+];
+
 
 // -------------------------------
-// 🔥 SEED FUNCTION
+// SEED FUNCTION
 // -------------------------------
 
 async function seedDatabase() {
@@ -148,8 +118,6 @@ async function seedDatabase() {
     await Promise.all([
       Project.deleteMany({}),
       Skill.deleteMany({}),
-      Tool.deleteMany({}),
-      Method.deleteMany({}),
     ]);
 
     console.log("🗑️ Données existantes supprimées");
@@ -157,8 +125,6 @@ async function seedDatabase() {
     // Insertion
     const projects = await Project.insertMany(projectsData);
     const skills = await Skill.insertMany(skillsData);
-    const tools = await Tool.insertMany(toolsData);
-    const methods = await Method.insertMany(methodsData);
 
     console.log(`💾 Ajouté :`);
     console.log(`   - ${projects.length} projets`);
@@ -176,6 +142,6 @@ async function seedDatabase() {
 }
 
 // -------------------------------
-// 🔥 RUN
+// RUN
 // -------------------------------
 seedDatabase();
