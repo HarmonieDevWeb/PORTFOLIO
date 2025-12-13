@@ -1,0 +1,38 @@
+{
+  "name": "my-portfolio",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "seed": "node scripts/seedProjects.js",
+    "lint": "npx next lint",
+    "lint:fix": "npx next lint --fix"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@heroicons/react": "^2.2.0",
+    "dotenv": "^17.2.3",
+    "framer-motion": "^12.23.25",
+    "joi": "^18.0.2",
+    "lucide-react": "^0.561.0",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.0.1",
+    "next": "^16.0.10",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-hook-form": "^7.67.0",
+    "react-icons": "^5.5.0",
+    "react-scroll": "^1.9.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "autoprefixer": "^10.4.22",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.6",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4"
+  }
+}

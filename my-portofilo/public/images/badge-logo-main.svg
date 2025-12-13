@@ -1,0 +1,93 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#334155" rx="20"/>
+  
+  <defs>
+    <linearGradient id="badgeMainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <linearGradient id="badgeStrokeFull" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Badge/Shield shape -->
+  <g transform="translate(200, 160)">
+    <!-- Outer rounded square badge -->
+    <rect x="-90" y="-90" width="180" height="180" 
+          fill="none" 
+          stroke="url(#badgeStrokeFull)" 
+          stroke-width="5" 
+          rx="24"
+          filter="url(#glow)"/>
+    
+    <!-- Inner glow effect -->
+    <rect x="-85" y="-85" width="170" height="170" 
+          fill="url(#badgeMainGradient)" 
+          opacity="0.08" 
+          rx="22"/>
+    
+    <!-- Large H in center -->
+    <g transform="translate(0, 0)">
+      <!-- Left bar -->
+      <rect x="-45" y="-50" width="12" height="100" fill="#f8e5ce" rx="3"/>
+      
+      <!-- Right bar -->
+      <rect x="33" y="-50" width="12" height="100" fill="#f8e5ce" rx="3"/>
+      
+      <!-- Horizontal bar with gradient -->
+      <rect x="-45" y="-6" width="90" height="12" fill="#FB923C" rx="3"/>
+      
+      <!-- Accent squares in corners -->
+      <rect x="-55" y="-60" width="8" height="8" fill="#FB923C" rx="2"/>
+      <rect x="47" y="-60" width="8" height="8" fill="#A78BFA" rx="2"/>
+      <rect x="-55" y="52" width="8" height="8" fill="#A78BFA" rx="2"/>
+      <rect x="47" y="52" width="8" height="8" fill="#FB923C" rx="2"/>
+      
+      <!-- Small dots at bar ends -->
+      <circle cx="-45" cy="-56" r="4" fill="#A78BFA"/>
+      <circle cx="45" cy="-56" r="4" fill="#FB923C"/>
+      <circle cx="-45" cy="56" r="4" fill="#FB923C"/>
+      <circle cx="45" cy="56" r="4" fill="#A78BFA"/>
+    </g>
+  </g>
+  
+  <!-- Text "H DEVWEB" -->
+  <text x="200" y="295" 
+        font-family="'Inter', 'Segoe UI', Arial, sans-serif" 
+        font-size="32" 
+        font-weight="600" 
+        fill="#f8e5ce" 
+        text-anchor="middle"
+        letter-spacing="5">
+    H DEVWEB
+  </text>
+  
+  <!-- Tagline -->
+  <text x="200" y="325" 
+        font-family="'Inter', 'Segoe UI', Arial, sans-serif" 
+        font-size="13" 
+        font-weight="300" 
+        fill="#94a3b8" 
+        text-anchor="middle"
+        letter-spacing="3">
+    WEB DEVELOPMENT
+  </text>
+  
+  <!-- Bottom accent line -->
+  <line x1="110" y1="340" x2="290" y2="340" 
+        stroke="url(#badgeStrokeFull)" 
+        stroke-width="2" 
+        opacity="0.6"/>
+</svg>
