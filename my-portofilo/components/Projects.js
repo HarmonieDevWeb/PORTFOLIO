@@ -60,13 +60,12 @@ export default function Projects() {
             "En cours": "bg-primary text-white border-orange-700",
             "À venir": "bg-gray-500 text-white border-blue-700"
         };
-        
+
 
         const getProjectImage = (image) => {
-            if (!image) return "/images/badge-logo-icon.svg"; // fallback
-            // Si image commence par http ou https → URL externe
+            console.log("Image reçue:", image);
+            if (!image) return "/images/badge-logo-icon.svg";
             if (/^https?:\/\//i.test(image)) return image;
-            // Sinon c’est un fichier local dans /public/images/
             return `/images/${image}`;
         };
 
@@ -74,15 +73,13 @@ export default function Projects() {
         return (
             <div className="mb-4 relative flex flex-col p-6 border border-gray-300 rounded-lg shadow-md w-full bg-white">
                 <div className="transition-all duration-300">
-                    <div className={`relative max-h-80 overflow-hidden ${isSecret ? 'mb-30' : ''}`}>
+                    <div className={`relative w-full h-40 overflow-hidden shadow-2xl ${isSecret ? 'mb-30' : ''}`}>
                         <Image
                             src={getProjectImage(project.image)}
                             alt={project.state === "Secret" ? "Image projet secret" : "Image du projet"}
-                            width={600}
-                            height={400}
-                            className={`${project.state === "Secret" ? "blur-lg" : ""} rounded`}
-                            objectFit="cover"
-                        />                           
+                            fill
+                            className={`${project.state === "Secret" ? "blur-lg mb-40" : ""} rounded object-cover`}
+                        />
                         {isSecret && (
                             <div className="absolute inset-1 flex items-center justify-center">
                                 <span className="text-white text-2xl font-bold bg-black/50 px-4 py-2 rounded">       <EyeClosed size={50} /> </span>
@@ -92,7 +89,7 @@ export default function Projects() {
                     {!isSecret && (
                         <>
                             <h1 className="text-1xl font-semibold mb-2 text-text ">{project.name}</h1>
-                            <p className="text-text mb-2 h-40 md:h-50 lg:h-65">{project.content}</p>
+                            <p className="text-text mb-1 h-40 md:h-45 lg:h-50">{project.content}</p>
                         </>
                     )}
                     <span className="text-sm text-gray-500">{project.create}</span>
@@ -151,7 +148,7 @@ export default function Projects() {
     if (loading) {
         return (
             <section id="projects" className="mb-16 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
+                <h2 className="text-3xl font-bold italic relative inline-block mb-8 ">
                     Mes Projets
                     <span className="block h-1 w-20 bg-accent mt-2"></span>
                 </h2>
@@ -193,8 +190,8 @@ export default function Projects() {
     return (
 
 
-        <section id="projects" className="mb-16 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
+        <section id="projects" className="mb-16 px-4 pt-20 md:(px-6, pt-25) lg:(px-8, pt-30) max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold italic relative inline-block mb-8 ">
                 Mes Projets
                 <span className="block h-1 w-20 bg-accent mt-2"></span>
             </h2>
@@ -207,9 +204,8 @@ export default function Projects() {
                 </div>
             ) : (
                 // Sinon, affiche la grille de projets
-                <div className="text-center mt-5 grid grid-cols-1 sm:grid-rows-2 lg:grid-rows-3 gap-4 sm:gap-6 lg:gap-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
-                        {/* Map sur le tableau projects pour créer une carte par projet */}
+                <div className="text-center mt-5 grid grid-cols-1 sm:grid-rows-2 lg:grid-rows-3 gap-2 sm:gap-4 lg:gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-6">
                         {projects.map((project) => (
                             <ProjectCard
                                 key={project._id}  // _id de MongoDB comme clé unique
@@ -223,7 +219,7 @@ export default function Projects() {
             {/* BOUTON DE SCROLL VERS CONTACT */}
             <button
                 onClick={handleScrollToContact}
-                className="bg-transparent border-none flex flex-col items-center mx-auto mt-12 cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
+                className="bg-transparent border-none flex flex-col items-center mx-auto cursor-pointer hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
                 aria-label="Faire défiler vers la section contact"
             >
                 {/* Icône avec animation bounce */}

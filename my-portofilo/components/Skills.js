@@ -99,8 +99,8 @@ export default function Skills() {
     };
 
     return (
-        <section id="skills" className="mb-16 px-4 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
+           <section id="skills" className="mb-16 px-4 pt-5 md:(px-6, pt-10) lg:(px-8, pt-15) max-w-7xl mx-auto">
+                <h2 className="text-3xl font-bold italic relative inline-block mb-8 mt-20">
                 Mes Compétences
                 <span className="block h-1 w-20 bg-accent mt-2"></span>
             </h2>

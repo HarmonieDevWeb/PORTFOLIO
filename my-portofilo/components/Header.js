@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-20 transition-all duration-300 ${scroll ? 'py-2 shadow-lg bg-primary' : 'py-4 md:py-6 shadow-md bg-primary'
+      className={`fixed top-0 left-0 right-0 z-10 transition-all duration-300 ${scroll ? 'py-2 shadow-lg bg-primary' : 'py-4 md:py-6 shadow-md bg-primary'
         }`}
     >
       <div className="container mx-auto px-3 md:px-5 lg:px-7 max-w-8xl">
@@ -58,7 +58,7 @@ export default function Header() {
                 to={item.href}
                 smooth={true}
                 duration={500}
-                className="text-white hover:text-secondary font-medium transition-colors relative group px-2"
+                className="text-white hover:text-secondary font-medium transition-colors relative group px-2 cursor-pointer"
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
@@ -84,17 +84,17 @@ export default function Header() {
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
             }`}
         >
-<nav className="hidden md:flex">
+<nav className="flex flex-col gap-4 py-4">
   {navItems.map((item) => (
     <Link
       key={item.name}
       to={item.href}
       smooth={true}
       duration={500}
-      className="text-white hover:text-secondary font-medium text-lg md:text-xl transition-colors relative group px-3 py-2"
+      onClick={() => setIsOpen(false)} // ferme le menu au clic
+      className="text-white hover:text-secondary font-medium text-lg transition-colors px-3 py-2 cursor-pointer"
     >
       {item.name}
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full"></span>
     </Link>
   ))}
 </nav>

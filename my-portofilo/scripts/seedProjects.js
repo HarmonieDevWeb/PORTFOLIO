@@ -19,7 +19,7 @@ const projectSchema = new mongoose.Schema(
     state: String,
     link: String,
     linkGitHub: String,
-    images: String,
+    image: String,
     order: Number,
     visibility: Boolean
   },
@@ -118,7 +118,7 @@ const projectsData = [
     status: "À venir",
     link: "",
     linkGitHub: "",
-    image: "",
+    image: "https://i.postimg.cc/YqqXP1qh/laterz-logo-complet.jpg",
     order: 3,
     visibility: true
   }
