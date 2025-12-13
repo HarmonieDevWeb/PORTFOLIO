@@ -104,7 +104,7 @@ export default function Skills() {
                 Mes Compétences
                 <span className="block h-1 w-20 bg-accent mt-2"></span>
             </h2>
-
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-6">
             {/* Frontend Skills */}
             <div className="mb-10">
                 <h3 className="text-2xl font-semibold mb-4 text-primary">FRONTEND</h3>
@@ -149,6 +149,7 @@ export default function Skills() {
                     ))}
                 </div>
             </div>
+        </div>
 
             {/* Scroll Button */}
             <button

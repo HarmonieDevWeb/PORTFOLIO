@@ -204,7 +204,7 @@ export default function Projects() {
                 </div>
             ) : (
                 // Sinon, affiche la grille de projets
-                <div className="text-center mt-5 grid grid-cols-1 sm:grid-rows-2 lg:grid-rows-3 gap-2 sm:gap-4 lg:gap-6">
+                <div className="text-center mt-5 mb-5 grid grid-cols-1  gap-2 sm:gap-4 lg:gap-6">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-6">
                         {projects.map((project) => (
                             <ProjectCard
