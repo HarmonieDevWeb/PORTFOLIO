@@ -1,7 +1,5 @@
 {/* FOOTER */}
-import { LuLinkedin } from "react-icons/lu";
-import { FaGithub } from "react-icons/fa";
-import { FiSend } from "react-icons/fi";
+import { Linkedin, Github, Send } from "lucide-react";
 import "../app/globals.css";
 
 export default function Footer() {
@@ -25,7 +23,7 @@ export default function Footer() {
                     className="text-white hover:text-background hover:scale-110 text-3xl md:text-4xl transition-all duration-300"
                     aria-label="Lien vers mon profil GitHub"
                 >
-                    <FaGithub />
+                    <Github />
                 </a>
                 {/* LINKEDIN */}
                 <a
@@ -35,7 +33,7 @@ export default function Footer() {
                     className="text-white hover:text-background hover:scale-110 text-3xl md:text-4xl transition-all duration-300"
                     aria-label="Lien vers mon profil LinkedIn"
                 >
-                    <LuLinkedin />
+                        <Linkedin />
                 </a>
                 {/* EMAIL */}
                 <a
@@ -43,7 +41,7 @@ export default function Footer() {
                     className="text-white hover:text-background hover:scale-110 text-3xl md:text-4xl transition-all duration-300"
                     aria-label="Lien vers la section contact"
                 >
-                    <FiSend />
+                    <Send />
                 </a>
             </div>
             

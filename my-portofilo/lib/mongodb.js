@@ -1,30 +1,50 @@
-import { MongoClient } from 'mongodb'
+import mongoose from 'mongoose';
 
-// URI de connexion MongoDB
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/my-portfolio'
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// Options de connexion
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+if (!MONGODB_URI) {
+  throw new Error(
+    "❌ Veuillez définir MONGODB_URI dans votre fichier .env.local"
+  );
 }
 
-let client
-let clientPromise
+/**
+ * Mise en cache globale pour éviter plusieurs connexions
+ * lors du hot reload en développement
+ */
+let cached = global.mongoose;
 
-if (process.env.NODE_ENV === 'development') {
-  // En développement, utiliser une variable globale pour éviter
-  // de créer trop de connexions lors du Hot Reload
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    global._mongoClientPromise = client.connect()
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+export default async function connectDB() {
+  // Si déjà connecté, retourner la connexion existante
+  if (cached.conn) {
+    console.log("✅ MongoDB: Utilisation connexion existante");
+    return cached.conn;
   }
-  clientPromise = global._mongoClientPromise
-} else {
-  // En production, créer une nouvelle connexion
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
-}
 
-// Exporter la promesse de connexion
-export default clientPromise
+  // Si pas de promesse en cours, créer une nouvelle connexion
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false, // Désactive le buffering des commandes
+    };
+
+    console.log("🔌 MongoDB: Nouvelle connexion...");
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+      console.log("✅ MongoDB: Connecté avec succès");
+      return mongoose;
+    });
+  }
+
+  try {
+    cached.conn = await cached.promise;
+  } catch (error) {
+    cached.promise = null;
+    console.error("❌ MongoDB: Erreur de connexion", error);
+    throw error;
+  }
+
+  return cached.conn;
+}

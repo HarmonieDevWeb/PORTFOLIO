@@ -2,9 +2,9 @@
 
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Project from '@/lib/models/Projects';
+import Skill from '@/lib/models/Skills';
 
-// GET PROJECT
+// GET SKILL
 export async function GET(request) {
   try {
     await connectDB();
@@ -12,26 +12,31 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const level = searchParams.get('level');
     const status = searchParams.get('status');
-    
-    let query = { visibility: true };
-    
+    const category = searchParams.get('category');
+  
+    let query = {};
+
     if (level) {
-      query.level = level;
+      query.level = parseInt(level);
     }
     
     if (status) {
       query.status = status;
     }
+
+    if (category) {
+      query.category = category;
+    }
     
-    const projects = await Project.find(query).sort({ order: 1, createdAt: -1 });
+    const skills = await Skill.find(query).sort({ level: -1, createdAt: -1 });
     
     return NextResponse.json({ 
       success: true, 
-      projects,
-      count: projects.length 
+      skills,
+      count: skills.length 
     });
   } catch (error) {
-    console.error('Erreur GET /api/projects:', error);
+    console.error('Erreur GET /api/skills:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -39,23 +44,23 @@ export async function GET(request) {
   }
 }
 
-// POST PROJECT
+// POST SKILL
 export async function POST(request) {
   try {
     await connectDB();
     const body = await request.json();
     
-    if (!body.name || !body.content) {
+    if (!body.name || !body.category) {
       return NextResponse.json(
         { success: false, error: 'Le nom et la description sont requis' },
         { status: 400 }
       );
     }
     
-    const project = await Project.create(body);
+    const skill = await Skill.create(body);
     
     return NextResponse.json(
-      { success: true, data: project, message: 'Projet créé avec succès' },
+      { success: true, data: skill, message: 'Skill créé avec succès' },
       { status: 201 }
     );
   } catch (error) {

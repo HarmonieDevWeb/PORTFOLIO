@@ -1,26 +1,26 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Project from '@/lib/models/Projects'; // ✅ Importer le MODÈLE, pas le schéma
+import Skill from '@/lib/models/Skills'; 
 
-// GET - ONE PROJECT
+// GET - ONE SKILL
 export async function GET(request, { params }) {
   try {
     await connectDB();
     
-    const project = await Project.findById(params.id);
+    const skill = await Skill.findById(params.id);
     
-    if (!project) {
+    if (!skill) {
       return NextResponse.json(
         { success: false, error: 'Projet non trouvé' },
         { status: 404 }
       );
     }
     
-    console.log("📦 Projet récupéré:", project); // ✅ Debug
+    console.log("📦 Projet récupéré:", skill); // ✅ Debug
     
-    return NextResponse.json({ success: true, data: project });
+    return NextResponse.json({ success: true, data: Skill });
   } catch (error) {
-    console.error('❌ Erreur GET /api/projects/[id]:', error);
+    console.error('❌ Erreur GET /api/skills/[id]:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -28,19 +28,19 @@ export async function GET(request, { params }) {
   }
 }
 
-// PUT - UPDATE PROJECT (remplacement complet)
+// PUT - UPDATE SKILL (remplacement complet)
 export async function PUT(request, { params }) {
   try {
     await connectDB();
     const body = await request.json();
     
-    const project = await Project.findByIdAndUpdate(
+    const skill = await Skill.findByIdAndUpdate(
       params.id,
       body,
       { new: true, runValidators: true }
     );
     
-    if (!project) {
+    if (!skill) {
       return NextResponse.json(
         { success: false, error: 'Projet non trouvé' },
         { status: 404 }
@@ -49,11 +49,11 @@ export async function PUT(request, { params }) {
     
     return NextResponse.json({ 
       success: true, 
-      data: project,
+      data: skill,
       message: 'Projet mis à jour avec succès'
     });
   } catch (error) {
-    console.error('❌ Erreur PUT /api/projects/[id]:', error);
+    console.error('❌ Erreur PUT /api/skills/[id]:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 400 }
@@ -61,19 +61,19 @@ export async function PUT(request, { params }) {
   }
 }
 
-// PATCH - UPDATE PROJECT (modification partielle)
+// PATCH - UPDATE SKILL (modification partielle)
 export async function PATCH(request, { params }) {
   try {
     await connectDB();
     const body = await request.json();
     
-    const project = await Project.findByIdAndUpdate(
+    const skill = await Skill.findByIdAndUpdate(
       params.id,
       { $set: body },
       { new: true, runValidators: true } // ✅ Ajout runValidators
     );
     
-    if (!project) {
+    if (!skill) {
       return NextResponse.json(
         { success: false, error: 'Projet non trouvé' },
         { status: 404 }
@@ -82,11 +82,11 @@ export async function PATCH(request, { params }) {
     
     return NextResponse.json({ 
       success: true, 
-      data: project,
+      data: skill,
       message: 'Projet modifié avec succès'
     });
   } catch (error) {
-    console.error('❌ Erreur PATCH /api/projects/[id]:', error);
+    console.error('❌ Erreur PATCH /api/skills/[id]:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 400 }
@@ -94,14 +94,14 @@ export async function PATCH(request, { params }) {
   }
 }
 
-// DELETE - ONE PROJECT
+// DELETE - ONE SKILL
 export async function DELETE(request, { params }) {
   try {
     await connectDB();
     
-    const project = await Project.findByIdAndDelete(params.id);
+    const skill = await Skill.findByIdAndDelete(params.id);
     
-    if (!project) {
+    if (!skill) {
       return NextResponse.json(
         { success: false, error: 'Projet non trouvé' },
         { status: 404 }
@@ -114,7 +114,7 @@ export async function DELETE(request, { params }) {
       message: 'Projet supprimé avec succès'
     });
   } catch (error) {
-    console.error('❌ Erreur DELETE /api/projects/[id]:', error);
+    console.error('❌ Erreur DELETE /api/skills/[id]:', error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
