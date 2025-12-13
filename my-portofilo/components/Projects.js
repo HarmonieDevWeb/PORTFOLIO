@@ -95,7 +95,7 @@ export default function Projects() {
                                 href="https://fr.linkedin.com/in/harmonie-chevrel"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-primary hover:text-accent text-xs md:text-4xl transition-all duration-300 flex items-center gap-3 "
+                                className="text-primary hover:text-accent text-3xl md:text-4xl transition-all duration-300 flex items-center gap-3 "
                                 aria-label="Lien vers mon profil LinkedIn"
                             >
                                 LinkedIn <Linkedin size={30}/>
