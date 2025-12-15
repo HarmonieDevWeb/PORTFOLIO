@@ -42,7 +42,7 @@ export default function Header() {
       <div className="container mx-auto px-3 md:px-5 lg:px-7 max-w-8xl">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="home" smooth={true} duration={500}>
+          <Link >
             <img
               src="/images/badge-logo-icon.svg"
               alt="Logo - Retour en haut de page"
