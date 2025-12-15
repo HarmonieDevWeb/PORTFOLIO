@@ -18,6 +18,7 @@ export default function Contact() {
   });
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [formDisabled, setFormDisabled] = useState(true);
 
   const handleChange = (e) => {
     setFormData({
@@ -52,6 +53,7 @@ export default function Contact() {
       }, 5000);
     } catch (error) {
       setStatus({ success: false, message: "Une erreur s'est produite. Veuillez réessayer." });
+      setFormDisabled(true);
     } finally {
       setLoading(false);
     }
@@ -68,7 +70,7 @@ export default function Contact() {
         <div className="space-y-6">
           <div className="flex items-center space-x-4">
             <AtSign className="h-6 w-6 text-primary" />
-            <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`} className="text-lg text-gray-700 hover:text-primary transition-colors">
+            <a href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`} className="text-2xl text-secondary hover:text-primary font-bold transition-colors">
               {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
             </a>
           </div>
@@ -79,7 +81,16 @@ export default function Contact() {
         </div>
 
         {/* Formulaire de contact */}
+
         <form ref={form} onSubmit={handleSubmit} className="space-y-4">
+          <div className="bg-secondary-500 border border-secondary rounded-md p-4 mb-4 flex flex-col">
+            <p className="text-secondary text-center font-medium">
+              Bientôt disponible.
+            </p>
+            <span className="text-center italic">
+              Pour me contacter cliquez sur le mail.
+            </span>
+          </div>
           <div>
             <label htmlFor="from_name" className="block text-sm font-medium text-gray-700">Nom</label>
             <input
@@ -89,7 +100,8 @@ export default function Contact() {
               value={formData.from_name}
               onChange={handleChange}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
+              disabled={formDisabled}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
           <div>
@@ -101,7 +113,8 @@ export default function Contact() {
               value={formData.reply_to}
               onChange={handleChange}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
+              disabled={formDisabled}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
           <div>
@@ -113,7 +126,8 @@ export default function Contact() {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
+              disabled={formDisabled}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
           <div>
@@ -125,13 +139,14 @@ export default function Contact() {
               value={formData.message}
               onChange={handleChange}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
+              disabled={formDisabled}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary disabled:opacity-50 disabled:cursor-not-allowed"
             ></textarea>
           </div>
           <button
             type="submit"
-            disabled={loading}
-            className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/80 transition disabled:opacity-50"
+            disabled={loading || formDisabled}
+            className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/80 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Envoi...' : 'Envoyer'}
           </button>
