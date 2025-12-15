@@ -32,7 +32,7 @@ export default function Skills() {
     }
   };
 
-  const SkillCard = ({ skill }) => {
+  const SkillCard = ({ skill, showLevel = true }) => {
     const IconComponent = skill.icon ? Icons[skill.icon] : null;
     const LevelLabel = (level) => {
       if (level >= 0 && level <= 4) return "Débutant";
@@ -47,9 +47,11 @@ export default function Skills() {
       {IconComponent && <IconComponent size={24} className="text-primary shrink-0" />}
       <h4 className="font-semibold text-primary">{skill.name}</h4>
     </div>
-    <div className="flex items-center gap-2">
-      <span className="text-sm text-gray-600 font-medium">{LevelLabel(skill.level)}</span>
-    </div>
+{showLevel && (
+      <div className="flex items-center gap-2">
+        <span className="text-sm text-gray-600 font-medium">{LevelLabel(skill.level)}</span>
+      </div>
+    )}
   </div>
 </div>
     );
@@ -61,7 +63,7 @@ export default function Skills() {
     return (
       <div className="inline-flex items-center gap-2 bg-gray-100 rounded-full px-3 py-1.5 text-sm border border-gray-300 hover:bg-gray-200 transition-colors cursor-pointer">
         {IconComponent && <IconComponent size={16} className="text-gray-600" />}
-        <span className="text-gray-700">{skill.name}</span>
+        <span className="text-primary">{skill.name}</span>
       </div>
     );
   };
@@ -145,9 +147,9 @@ export default function Skills() {
           {softSkills.length > 0 && (
             <div className="border p-4 md:p-6 border-gray-300 rounded-lg shadow-md bg-white">
               <h3 className="text-2xl font-semibold mb-6 text-primary italic">SoftSkills</h3>
-              <div className="space-y-3">
-                {softSkills.filter(s => s.level >= 7).map((skill) => (
-                  <SkillCard key={skill._id || skill.name} skill={skill} showLabel={false} />
+              <div className="space-y-3 flex flex-wrap gap-2">
+{softSkills.filter(s => s.level >= 7).map((skill) => (
+                  <SkillCard key={skill._id || skill.name} skill={skill} showLevel={false} />
                 ))}
               </div>
             </div>
