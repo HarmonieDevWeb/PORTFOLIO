@@ -27,12 +27,13 @@ const projectSchema = new mongoose.Schema(
 );
 
 const skillSchema = new mongoose.Schema(
-{
-  name: String,
-  category: String,
-  level: Number,
-  status: String
-},
+  {
+    name: String,
+    category: String,
+    level: Number,
+    status: String,
+    icon: String
+  },
   { timestamps: true }
 );
 
@@ -64,7 +65,7 @@ const projectsData = [
   },
 
   {
-    name: "PORTOFILO",
+    name: "PORTFOLIO",
     content: "Mon site web personnel pour présenter mes compétences, projets et expériences.",
     stack: ["React.js", "Next.js", "Tailwind"],
     create: "Décembre 2025",
@@ -94,95 +95,173 @@ const projectsData = [
 
 
 const skillsData = [
- // ======================
-  // FRONTEND — ACQUIS
+  // ======================
+  // HARDSKILL
   // ======================
   {
     name: "HTML5 / CSS3",
-    category: "Frontend",
-    level: 95,
+    category: "HardSkill",
+    level: 9,
     status: "Acquis",
+    icon: "Code2"
   },
   {
     name: "JavaScript (ES6+)",
-    category: "Frontend",
-    level: 70,
+    category: "HardSkill",
+    level: 7,
     status: "Acquis",
+    icon: "FileCode"
   },
   {
     name: "Svelte / SvelteKit",
-    category: "Frontend",
-    level: 70,
+    category: "HardSkill",
+    level: 7,
     status: "Acquis",
+    icon: "Zap"
   },
   {
     name: "CMS PocketBase",
-    category: "Frontend",
-    level: 70,
+    category: "HardSkill",
+    level: 7,
     status: "Acquis",
+    icon: "Database"
   },
-
-  // ======================
-  // BACKEND — ACQUIS
-  // ======================
   {
     name: "Node.js",
-    category: "Backend",
-    level: 70,
+    category: "HardSkill",
+    level: 7,
     status: "Acquis",
+    icon: "Server"
   },
   {
     name: "Express.js",
-    category: "Backend",
-    level: 70,
+    category: "HardSkill",
+    level: 7,
     status: "Acquis",
+    icon: "Route"
   },
   {
     name: "APIs RESTful",
-    category: "Backend",
-    level: 70,
+    category: "HardSkill",
+    level: 7,
     status: "Acquis",
+    icon: "Network"
   },
   {
     name: "PostgreSQL",
-    category: "Backend",
-    level: 80,
+    category: "HardSkill",
+    level: 8,
     status: "Acquis",
+    icon: "Database"
   },
   {
     name: "Sequelize",
-    category: "Backend",
-    level: 80,
+    category: "HardSkill",
+    level: 8,
     status: "Acquis",
+    icon: "Layers"
   },
-
-  // ======================
-  // EN APPRENTISSAGE
-  // ======================
   {
     name: "React.js",
-    category: "Frontend",
-    level: 40,
+    category: "HardSkill",
+    level: 4,
     status: "En apprentissage",
+    icon: "Atom"
   },
   {
     name: "Next.js",
-    category: "Frontend",
-    level: 40,
+    category: "HardSkill",
+    level: 4,
     status: "En apprentissage",
+    icon: "Rocket"
   },
   {
     name: "Tailwind CSS",
-    category: "Frontend",
-    level: 50,
+    category: "HardSkill",
+    level: 5,
     status: "En apprentissage",
+    icon: "Palette"
   },
-
   {
     name: "MongoDB",
-    category: "Backend",
-    level: 60,
+    category: "HardSkill",
+    level: 6,
     status: "En apprentissage",
+    icon: "Database"
+  },
+
+  // ======================
+  // SOFTSKILLS
+  // ======================
+  {
+    name: "Communication",
+    category: "Softskill",
+    level: 8,
+    status: "Acquis",
+    icon: "MessageCircle"
+  },
+  {
+    name: "Travail d'équipe",
+    category: "Softskill",
+    level: 8,
+    status: "Acquis",
+    icon: "Users"
+  },
+  {
+    name: "Résolution de problèmes",
+    category: "Softskill",
+    level: 7,
+    status: "Acquis",
+    icon: "Lightbulb"
+  },
+  {
+    name: "Autonomie",
+    category: "Softskill",
+    level: 9,
+    status: "Acquis",
+    icon: "Target"
+  },
+  {
+    name: "Gestion du temps",
+    category: "Softskill",
+    level: 9,
+    status: "Acquis",
+    icon: "Clock"
+  },
+  {
+    name: "Adaptabilité",
+    category: "Softskill",
+    level: 8,
+    status: "Acquis",
+    icon: "RefreshCw"
+  },
+  {
+    name: "Curiosité / Veille techno",
+    category: "Softskill",
+    level: 6,
+    status: "Acquis",
+    icon: "Eye"
+  },
+  {
+    name: "Esprit critique",
+    category: "Softskill",
+    level: 9,
+    status: "Acquis",
+    icon: "Brain"
+  },
+  {
+    name: "Créativité",
+    category: "Softskill",
+    level: 6,
+    status: "Acquis",
+    icon: "Palette"
+  },
+  {
+    name: "Persévérance",
+    category: "Softskill",
+    level: 9,
+    status: "Acquis",
+    icon: "Flame"
   },
 
   // ======================
@@ -191,38 +270,51 @@ const skillsData = [
   {
     name: "Visual Studio Code",
     category: "Tool",
-    level: 90,
+    level: 9,
     status: "Acquis",
+    icon: "Code"
   },
   {
     name: "Git & GitHub",
     category: "Tool",
-    level: 85,
+    level: 8,
     status: "Acquis",
+    icon: "GitBranch"
   },
   {
     name: "Thunder Client",
     category: "Tool",
-    level: 75,
+    level: 7,
     status: "Acquis",
+    icon: "Zap"
   },
   {
     name: "Jest",
     category: "Tool",
-    level: 60,
+    level: 6,
     status: "En apprentissage",
+    icon: "TestTube"
   },
-    {
+  {
     name: "Docker",
     category: "Tool",
-    level: 30,
+    level: 3,
     status: "En apprentissage",
+    icon: "Container"
   },
   {
     name: "EmailJS",
     category: "Tool",
-    level: 70,
+    level: 7,
     status: "Acquis",
+    icon: "Mail"
+  },
+    {
+    name: "Vercel",
+    category: "Tool",
+    level: 7,
+    status: "Acquis",
+    icon: "View"
   },
 
   // ======================
@@ -231,53 +323,61 @@ const skillsData = [
   {
     name: "Agile / Scrum",
     category: "Method",
-    level: 70,
+    level: 7,
     status: "Acquis",
+    icon: "Users"
   },
   {
     name: "Méthodologie MERISE",
     category: "Method",
-    level: 65,
+    level: 6,
     status: "Acquis",
+    icon: "Workflow"
   },
   {
     name: "Mobile First",
     category: "Method",
-    level: 75,
+    level: 7,
     status: "Acquis",
+    icon: "Smartphone"
   },
   {
     name: "A11Y",
     category: "Method",
-    level: 60,
+    level: 6,
     status: "Acquis",
+    icon: "Accessibility"
   },
   {
     name: "SEO",
     category: "Method",
-    level: 65,
+    level: 6,
     status: "En apprentissage",
+    icon: "Search"
   },
   {
     name: "RGPD",
     category: "Method",
-    level: 55,
+    level: 5,
     status: "Acquis",
+    icon: "Shield"
   },
   {
     name: "Cybersécurité",
     category: "Method",
-    level: 45,
+    level: 4,
     status: "En apprentissage",
+    icon: "Lock"
   },
   {
-    name: "DRY / Clean Code",
+    name: "DRY",
     category: "Method",
-    level: 70,
+    level: 7,
     status: "Acquis",
-  },
- 
+    icon: "Sparkles"
+  }
 ];
+
 
 
 // -------------------------------
