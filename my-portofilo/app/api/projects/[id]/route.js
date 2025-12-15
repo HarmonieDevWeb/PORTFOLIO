@@ -2,28 +2,31 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Project from '@/lib/models/Projects'; // ✅ Importer le MODÈLE, pas le schéma
 
-// GET - ONE PROJECT
-export async function GET(request, { params }) {
+
+// POST PROJECT
+export async function POST(request) {
   try {
     await connectDB();
+    const body = await request.json();
     
-    const project = await Project.findById(params.id);
-    
-    if (!project) {
+    if (!body.name || !body.content) {
       return NextResponse.json(
-        { success: false, error: 'Projet non trouvé' },
-        { status: 404 }
+        { success: false, error: 'Le nom et la description sont requis' },
+        { status: 400 }
       );
     }
     
-    console.log("📦 Projet récupéré:", project); // ✅ Debug
+    const project = await Project.create(body);
     
-    return NextResponse.json({ success: true, data: project });
+    return NextResponse.json(
+      { success: true, data: project, message: 'Projet créé avec succès' },
+      { status: 201 }
+    );
   } catch (error) {
-    console.error('❌ Erreur GET /api/projects/[id]:', error);
+    console.error('Erreur POST /api/projects:', error);
     return NextResponse.json(
       { success: false, error: error.message },
-      { status: 500 }
+      { status: 400 }
     );
   }
 }
