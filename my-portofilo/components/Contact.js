@@ -3,14 +3,14 @@
 
 
 import { useState, useRef } from 'react';
-import emailJS from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 import { MapPin, AtSign } from 'lucide-react';
 
 
 export default function Contact() {
 
   const form = useRef();
-  const [fromData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     from_name: '',
     reply_to: '',
     subject: '',
@@ -21,7 +21,7 @@ export default function Contact() {
 
   const handleChange = (e) => {
     setFormData({
-      ...fromData,
+      ...formData,
       [e.target.name]: e.target.value
     });
   }
@@ -32,7 +32,7 @@ export default function Contact() {
     setStatus(null);
 
     try {
-      await emailJS.sendForm(
+      await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
         form.current,
@@ -86,7 +86,7 @@ export default function Contact() {
               type="text"
               name="from_name"
               id="from_name"
-              value={fromData.from_name}
+              value={formData.from_name}
               onChange={handleChange}
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
@@ -98,7 +98,7 @@ export default function Contact() {
               type="email"
               name="reply_to"
               id="reply_to"
-              value={fromData.reply_to}
+              value={formData.reply_to}
               onChange={handleChange}
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
@@ -110,7 +110,7 @@ export default function Contact() {
               type="text"
               name="subject"
               id="subject"
-              value={fromData.subject}
+              value={formData.subject}
               onChange={handleChange}
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"
@@ -122,7 +122,7 @@ export default function Contact() {
               name="message"
               id="message"
               rows="4"
-              value={fromData.message}
+              value={formData.message}
               onChange={handleChange}
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-primary focus:border-primary"

@@ -43,31 +43,3 @@ export async function GET(request) {
     );
   }
 }
-
-// POST SKILL
-export async function POST(request) {
-  try {
-    await connectDB();
-    const body = await request.json();
-    
-    if (!body.name || !body.category) {
-      return NextResponse.json(
-        { success: false, error: 'Le nom et la description sont requis' },
-        { status: 400 }
-      );
-    }
-    
-    const skill = await Skill.create(body);
-    
-    return NextResponse.json(
-      { success: true, data: skill, message: 'Skill créé avec succès' },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.error('Erreur POST /api/projects:', error);
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 400 }
-    );
-  }
-}
