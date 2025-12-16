@@ -37,7 +37,7 @@ export default function LoginPage() {
       }
 
       if (result?.ok) {
-        router.push('/admin');
+        router.push('/dashboard/admin');
         router.refresh();
       }
     } catch (err) {

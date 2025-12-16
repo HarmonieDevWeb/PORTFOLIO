@@ -1,9 +1,9 @@
-// app/dashboard/admin/page.jsx
+import Dashboard from '@/components/dashboard';
+
 export default function AdminPage() {
   return (
     <div>
-      <h1>Tableau de bord Admin</h1>
-      {/* Contenu admin ici */}
+      <Dashboard />
     </div>
   );
 }
