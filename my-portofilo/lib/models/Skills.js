@@ -40,8 +40,6 @@ icon: {
     timestamps: true
 });
 
-// Index pour améliorer les performances
-stackSchema.index({ level: 1, order: 1 });
-stackSchema.index({ status: 1 });
+
 
 export default mongoose.models.Skill || mongoose.model('Skill', stackSchema);

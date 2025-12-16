@@ -56,7 +56,7 @@ const projectSchema = new mongoose.Schema({
 });
 
 // Index pour améliorer les performances
-projectSchema.index({ level: 1, order: 1 });
+projectSchema.index({ create: 1, order: 1 });
 projectSchema.index({ status: 1 });
 
 export default mongoose.models.Project || mongoose.model('Project', projectSchema);
