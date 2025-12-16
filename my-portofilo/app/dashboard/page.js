@@ -1,4 +1,3 @@
-// app/dashboard/page.jsx
 'use client';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
