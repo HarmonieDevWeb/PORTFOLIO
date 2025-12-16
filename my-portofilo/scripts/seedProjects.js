@@ -1,5 +1,4 @@
 // Lancer avec : node scripts/seed.js
-
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
