@@ -31,7 +31,9 @@ const handler = NextAuth({
 
           return {
             id: user._id.toString(),
-            name: user.name,
+            lastname: user.lastname,
+            firstname: user.firstname,
+            username: user.username,
             email: user.email,
             role: user.role
           };
