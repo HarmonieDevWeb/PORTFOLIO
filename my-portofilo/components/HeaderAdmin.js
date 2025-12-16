@@ -1,12 +1,20 @@
 'use client';
 
 import { LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 const HeaderAdmin = ({ onLogout }) => {
-  const handleLogout = () => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
     if (onLogout) {
-      onLogout();
+      await onLogout();
     }
+    // Détruit la session côté serveur
+    await signOut({ redirect: false });
+    // Redirige vers la page d'accueil
+    router.push('/');
   };
 
   return (

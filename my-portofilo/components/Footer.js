@@ -1,17 +1,20 @@
 {/* FOOTER */}
-import { Linkedin, Github, Send } from "lucide-react";
+import { Linkedin, Github, Send, ShieldUser} from "lucide-react";
 import "../app/globals.css";
-
+import Link from 'next/link'
 export default function Footer() {
+
+    
     return (
         <footer className="bg-primary text-center py-8 md:py-10 mt-12 border-t border-gray-300">
-            <div className="mb-6 flex flex-col items-center gap-2">
+                <div className="mb-6 flex flex-col items-center gap-2">
                 <span className="text-white font-bold text-3xl md:text-4xl lg:text-5xl tracking-wide">
                     HARMONIE CHEVREL
                 </span>
                 <span className="text-background text-lg md:text-xl lg:text-2xl italic">
                     Développeuse Fullstack
                 </span>
+
             </div>
             
             <div className="flex justify-center space-x-6 md:space-x-8 mb-6">
@@ -43,11 +46,13 @@ export default function Footer() {
                 >
                     <Send />
                 </a>
+                <Link href="/dashboard"><ShieldUser className="right-5 top-2 text-white" /> </Link>
             </div>
             
             <p className="text-white/80 text-sm md:text-base">
                 &copy; {new Date().getFullYear()} Harmonie Dev Web. Tous droits réservés.
             </p>
+            
         </footer>
     );
 }

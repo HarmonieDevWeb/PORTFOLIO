@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connectDB } from "@/lib/mongodb";
-import User from "@/models/User";
+import connectDB from "@/lib/mongodb";
+import User from "@/lib/models/User.js";
 import argon2 from "argon2";
 
 const handler = NextAuth({

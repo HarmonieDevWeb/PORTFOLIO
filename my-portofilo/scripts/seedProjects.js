@@ -99,7 +99,8 @@ async function seedDatabase() {
 
     // Nettoyage des collections existantes
     console.log("🗑️  Suppression des données existantes...");
-    await Promise.all([
+        await Promise.all([
+      Project.deleteMany({}),
     ]);
     console.log("✅ Données existantes supprimées");
 

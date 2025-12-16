@@ -1,25 +1,10 @@
-// app/admin/layout.js
 'use client';
+import AdminLayout from '@/components/AdminLayout';
 
-import { useRouter } from 'next/navigation';
-import HeaderAdmin from '@/components/HeaderAdmin';
-
-export default function AdminLayout({ children }) {
-  const router = useRouter();
-
-  const handleLogout = () => {
-    // Logique de déconnexion
-    router.push('/');
-  };
-
+export default function DashLayout({ children }) {
   return (
-    <div>
-      <HeaderAdmin onLogout={handleLogout} />
-      {children}
-    </div>
+      <AdminLayout>
+        {children}
+      </AdminLayout>
   );
-
-
-  
-
 }
