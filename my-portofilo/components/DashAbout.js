@@ -16,12 +16,15 @@ export default function DashAbout() {
   //Etat des sections
   const [isDiplomaOpen, setIsDiplomaOpen] = useState(false);
   const [isCertifOpen, setIsCertifOpen] = useState(false);
+  const [isExpOpen, setIsExpOpen] = useState(false);
 
-  // États pour les diplômes (liste dynamique)
+  // États pour données
   const [diplomas, setDiplomas] = useState([]);
+  const [certifs, setCertifs] = useState([]);
+  const [ExpPros, setExpPros] = useState([]);
 
-  const addDiploma = () => {
-    setDiplomas([...diplomas, {
+  const addDiplomas = () => {
+    setDatas([...diplomas, {
       id: Date.now(),
       type: "",
       lieu: "",
@@ -32,6 +35,34 @@ export default function DashAbout() {
 
   const removeDiploma = (id) => {
     setDiplomas(diplomas.filter(d => d.id !== id));
+  };
+
+    const addCertif = () => {
+    setCertifs([...diplomas, {
+      id: Date.now(),
+      type: "",
+      lieu: "",
+      dateDebut: "",
+      dateFin: ""
+    }]);
+  };
+
+  const removeCertif = (id) => {
+    setExpPros(ExpPros.filter(d => d.id !== id));
+  };
+
+      const addExpPros = () => {
+    setExpPros([...ExpPros, {
+      id: Date.now(),
+      type: "",
+      lieu: "",
+      dateDebut: "",
+      dateFin: ""
+    }]);
+  };
+
+  const removeExpPros = (id) => {
+    setExpPros(ExpPros.filter(d => d.id !== id));
   };
 
   return (
@@ -131,7 +162,7 @@ export default function DashAbout() {
               ))}
 
               <button
-                onClick={addDiploma}
+                onClick={addDiplomas}
                 className="flex items-center gap-2 text-secondary hover:text-secondary/80 font-medium transition-colors"
               >
                 <CirclePlus className="w-5 h-5" />
@@ -150,9 +181,9 @@ export default function DashAbout() {
           >
             <h3 className=" text-gray-800">Certifications</h3>
             <div className="flex items-center gap-2">
-              {diplomas.length > 0 && (
+              {certifs.length > 0 && (
                 <span className="bg-secondary text-white text-xs px-2 py-1 rounded-full">
-                  {diplomas.length}
+                  {certifs.length}
                 </span>
               )}
               {isCertifOpen ? (
@@ -165,10 +196,10 @@ export default function DashAbout() {
 
           {isCertifOpen && (
             <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
-              {diplomas.map((diploma) => (
-                <div key={diploma.id} className="space-y-4 p-4 bg-gray-50 rounded-lg relative">
+              {certifs.map((certif) => (
+                <div key={certif.id} className="space-y-4 p-4 bg-gray-50 rounded-lg relative">
                   <button
-                    onClick={() => removeDiploma(diploma.id)}
+                    onClick={() => removeCertif(certif.id)}
                     className="absolute top-2 right-2 text-red-500 hover:text-red-700 transition-colors"
                   >
                     <CircleMinus className="w-5 h-5" />
@@ -177,7 +208,7 @@ export default function DashAbout() {
                   <div className="space-y-3">
                     <input
                       type="text"
-                      placeholder="Type et nom du diplôme"
+                      placeholder="Type et nom de la certification"
                       className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
                     />
                     <input
@@ -211,11 +242,11 @@ export default function DashAbout() {
               ))}
 
               <button
-                onClick={addDiploma}
+                onClick={addCertif}
                 className="flex items-center gap-2 text-secondary hover:text-secondary/80 font-medium transition-colors"
               >
                 <CirclePlus className="w-5 h-5" />
-                Ajouter un diplôme
+                Ajouter la Certifications
               </button>
             </div>
           )}
@@ -223,36 +254,91 @@ export default function DashAbout() {
       </div>
 
       {/* Expérience Pro */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
-          Expérience Pro
+          Expériences Pro
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-4">
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-primary mb-2">
-              Date de début
-            </label>
-            <DatePicker
-              selected={experienceStartDate}
-              onChange={(date) => setExperienceStartDate(date)}
-              locale={fr}
-              dateFormat="MM/yyyy"
-              customInput={<CalendarDays />}
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-primary mb-2">
-              Date de fin
-            </label>
-            <DatePicker
-              selected={experienceEndDate}
-              onChange={(date) => setExperienceEndDate(date)}
-              locale={fr}
-              dateFormat="MM/yyyy"
-              customInput={<CalendarDays />}
-              minDate={experienceStartDate}
-            />
-          </div>
+
+
+        <div className="border-2 border-secondary rounded-2xl overflow-hidden">
+
+          <button
+            onClick={() => setIsExpOpen(!isExpOpen)}
+            className="w-full flex items-center justify-between p-4 bg-linear-to-r from-secondary/5 to-transparent hover:from-secondary/10 transition-all"
+          >
+
+            <h3 className=" text-gray-800">Expériences</h3>
+
+            <div className="flex items-center gap-2">
+              {ExpPros.length > 0 && (
+                <span className="bg-secondary text-white text-xs px-2 py-1 rounded-full">
+                  {ExpPros.length}
+                </span>
+              )}
+              {isExpOpen ? (
+                <ChevronUp className="w-5 h-5 text-secondary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-secondary" />
+              )}
+            </div>
+          </button>
+
+          {isExpOpen && (
+            <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
+              {ExpPros.map((ExpPro) => (
+                <div key={ExpPro.id} className="space-y-4 p-4 bg-gray-50 rounded-lg relative">
+                  <button
+                    onClick={() => removeExpPros(ExpPro.id)}
+                    className="absolute top-2 right-2 text-red-500 hover:text-red-700 transition-colors"
+                  >
+                    <CircleMinus className="w-5 h-5" />
+                  </button>
+
+                  <div className="space-y-3">
+                    <input
+                      type="text"
+                      placeholder="Type et nom du Poste"
+                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Lieu d'activité'"
+                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-primary">
+                        Date de début
+                      </label>
+                      <input
+                        type="month"
+                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-primary">
+                        Date de fin
+                      </label>
+                      <input
+                        type="month"
+                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <button
+                onClick={addExpPros}
+                className="flex items-center gap-2 text-secondary hover:text-secondary/80 font-medium transition-colors"
+              >
+                <CirclePlus className="w-5 h-5" />
+                Ajouter un diplôme
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -267,6 +353,6 @@ export default function DashAbout() {
           </select>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
