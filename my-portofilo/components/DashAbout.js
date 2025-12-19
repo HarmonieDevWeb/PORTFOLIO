@@ -4,33 +4,34 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { fr } from 'date-fns/locale';
-import { CalendarDays, CirclePlus, CircleMinus, UserRoundPen } from "lucide-react";
+import { CalendarDays, CirclePlus, CircleMinus, UserRoundPen, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function DashAbout() {
+  // Etat des dates
   const [formationStartDate, setFormationStartDate] = useState(null);
   const [formationEndDate, setFormationEndDate] = useState(null);
   const [experienceStartDate, setExperienceStartDate] = useState(null);
   const [experienceEndDate, setExperienceEndDate] = useState(null);
-  const isDIploma = useSate(false);
 
-  const CustomInput = ({ value, onClick }) => (
-    <button
-      onClick={onClick}
-      className="flex items-center justify-between gap-3 bg-white shadow-sm rounded-lg px-4 py-3 border border-gray-200 hover:border-accent hover:shadow-md transition-all w-full text-left min-w-[200px]"
-    >
-      <span className="text-primary text-sm">
-        {value || "MM/AAAA"}
-      </span>
-      <CalendarDays className="w-5 h-5 text-gray-400 shrink-0" />
-    </button>
-  );
+  //Etat des sections
+  const [isDiplomaOpen, setIsDiplomaOpen] = useState(false);
 
-  const AddDiploma = ({ onClick }) => (
-    < CirclePlus
-      onClick={onClick}
-    />
+  // États pour les diplômes (liste dynamique)
+  const [diplomas, setDiplomas] = useState([]);
 
-  )
+  const addDiploma = () => {
+    setDiplomas([...diplomas, { 
+      id: Date.now(), 
+      type: "", 
+      lieu: "", 
+      dateDebut: "", 
+      dateFin: "" 
+    }]);
+  };
+
+  const removeDiploma = (id) => {
+    setDiplomas(diplomas.filter(d => d.id !== id));
+  };
 
   return (
     <section className="max-w-4xl mx-auto px-6 py-8 space-y-10">
@@ -54,86 +55,96 @@ export default function DashAbout() {
         </div>
       </div>
 
-      {/* Formations */}
+ {/* Formations */}
       <div className="space-y-6">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
           Formations
         </h2>
-        <div onClick className="grid grid-cols-1 md:grid-cols-2 gap-6 border-b-2 border-r-2 border-secondary rounded-2xl">
-          <h3>Parcours Académique</h3>
-          {isDiploma && (
-            <div className="hidden space-y-2"></div>
-          )}
-          {!isDiploma && (
-            <>
-            <div className="space-y-2">
-              <input type="text" placeholder="Type et nom du diplôme" className="mb-2 bg-white shadow-sm rounded-lg px-2 py-2 border border-gray-200"></input>
-              <input type="text" placeholder="Lieu d'obtention" className="bg-white shadow-sm rounded-lg px-2 py-2 border border-gray-200"></input>
-            </div><div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-4">
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-primary mb-2">
-                    Date de début
-                  </label>
-                  <DatePicker
-                    selected={formationStartDate}
-                    onChange={(date) => setFormationStartDate(date)}
-                    locale={fr}
-                    dateFormat="MM/yyyy"
-                    customInput={<CustomInput />} />
-                </div>
-                <div className="space-y-2 mb-2">
-                  <label className="block text-sm font-medium text-primary mb-2">
-                    Date de fin
-                  </label>
-                  <DatePicker
-                    selected={formationEndDate}
-                    onChange={(date) => setFormationEndDate(date)}
-                    locale={fr}
-                    dateFormat="MM/yyyy"
-                    customInput={<CustomInput />}
-                    minDate={formationStartDate} />
-                </div>
-              </div>
-              </>
-          )}
 
-          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-b-2 border-r-2 border-secondary rounded-2xl">
-          <h3>Certifications</h3>
-          <div className="space-y-2">
-            <input type="text" placeholder="Type et nom du diplôme" className="mb-2 bg-white shadow-sm rounded-lg px-2 py-2 border border-gray-200"></input>
-            <input type="text" placeholder="Lieu d'obtention" className="bg-white shadow-sm rounded-lg px-2 py-2 border border-gray-200"></input>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-4">
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-primary mb-2">
-                Date de début
-              </label>
-              <DatePicker
-                selected={formationStartDate}
-                onChange={(date) => setFormationStartDate(date)}
-                locale={fr}
-                dateFormat="MM/yyyy"
-                customInput={<CustomInput />}
-              />
+        <div className="border-2 border-secondary rounded-2xl overflow-hidden">
+          <button
+            onClick={() => setIsDiplomaOpen(!isDiplomaOpen)}
+            className="w-full flex items-center justify-between p-4 bg-linear-to-r from-secondary/5 to-transparent hover:from-secondary/10 transition-all"
+          >
+            <h3 className=" text-gray-800">Parcours Académique</h3>
+            <div className="flex items-center gap-2">
+              {diplomas.length > 0 && (
+                <span className="bg-secondary text-white text-xs px-2 py-1 rounded-full">
+                  {diplomas.length}
+                </span>
+              )}
+              {isDiplomaOpen ? (
+                <ChevronUp className="w-5 h-5 text-secondary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-secondary" />
+              )}
             </div>
-            <div className="space-y-2 mb-2">
-              <label className="block text-sm font-medium text-primary mb-2">
-                Date de fin
-              </label>
-              <DatePicker
-                selected={formationEndDate}
-                onChange={(date) => setFormationEndDate(date)}
-                locale={fr}
-                dateFormat="MM/yyyy"
-                customInput={<CustomInput />}
-                minDate={formationStartDate}
-              />
+          </button>
+
+          {isDiplomaOpen && (
+            <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
+              {diplomas.map((diploma) => (
+                <div key={diploma.id} className="space-y-4 p-4 bg-gray-50 rounded-lg relative">
+                  <button
+                    onClick={() => removeDiploma(diploma.id)}
+                    className="absolute top-2 right-2 text-red-500 hover:text-red-700 transition-colors"
+                  >
+                    <CircleMinus className="w-5 h-5" />
+                  </button>
+                  
+                  <div className="space-y-3">
+                    <input
+                      type="text"
+                      placeholder="Type et nom du diplôme"
+                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Lieu d'obtention"
+                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-primary">
+                        Date de début
+                      </label>
+                      <input
+                        type="month"
+                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-primary">
+                        Date de fin
+                      </label>
+                      <input
+                        type="month"
+                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <button
+                onClick={addDiploma}
+                className="flex items-center gap-2 text-secondary hover:text-secondary/80 font-medium transition-colors"
+              >
+                <CirclePlus className="w-5 h-5" />
+                Ajouter un diplôme
+              </button>
             </div>
-          </div>
+          )}
         </div>
 
+        {/* Certifications */}
+        <div className=" rounded-2xl overflow-hidden">
+            <h3 className="text-lg font-semibold text-gray-800">Certifications</h3>
+
+        </div>
       </div>
 
       {/* Expérience Pro */}
@@ -151,7 +162,7 @@ export default function DashAbout() {
               onChange={(date) => setExperienceStartDate(date)}
               locale={fr}
               dateFormat="MM/yyyy"
-              customInput={<CustomInput />}
+              customInput={<CalendarDays />}
             />
           </div>
           <div className="space-y-2">
@@ -163,7 +174,7 @@ export default function DashAbout() {
               onChange={(date) => setExperienceEndDate(date)}
               locale={fr}
               dateFormat="MM/yyyy"
-              customInput={<CustomInput />}
+              customInput={<CalendarDays />}
               minDate={experienceStartDate}
             />
           </div>
