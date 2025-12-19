@@ -46,7 +46,7 @@ export default function Hero() {
               href="https://github.com/HarmonieDevWeb"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-secondary text-white px-10 font-bold h-12 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition"
+              className="bg-secondary text-white px-10 font-bold h-10 w-40 flex items-center justify-center rounded-full hover:bg-opacity-0 transition"
             >
               <Github className="mr-2 text-4xl" />
               GitHub

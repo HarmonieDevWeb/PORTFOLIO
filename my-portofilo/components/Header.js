@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-10 transition-all duration-300 ${scroll ? 'py-2 shadow-lg bg-primary' : 'py-4 md:py-6 shadow-md bg-primary'
+      className={`fixed top-0 left-0 right-0 z-10 transition-all duration-300 ${scroll ? 'py-2 shadow-lg bg-primary' : 'py-4 shadow-md bg-primary'
         }`}
     >
       <div className="container mx-auto px-3 md:px-5 lg:px-7 max-w-8xl">

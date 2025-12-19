@@ -15,17 +15,18 @@ export default function DashAbout() {
 
   //Etat des sections
   const [isDiplomaOpen, setIsDiplomaOpen] = useState(false);
+  const [isCertifOpen, setIsCertifOpen] = useState(false);
 
   // États pour les diplômes (liste dynamique)
   const [diplomas, setDiplomas] = useState([]);
 
   const addDiploma = () => {
-    setDiplomas([...diplomas, { 
-      id: Date.now(), 
-      type: "", 
-      lieu: "", 
-      dateDebut: "", 
-      dateFin: "" 
+    setDiplomas([...diplomas, {
+      id: Date.now(),
+      type: "",
+      lieu: "",
+      dateDebut: "",
+      dateFin: ""
     }]);
   };
 
@@ -55,7 +56,7 @@ export default function DashAbout() {
         </div>
       </div>
 
- {/* Formations */}
+      {/* Formations */}
       <div className="space-y-6">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
           Formations
@@ -92,7 +93,7 @@ export default function DashAbout() {
                   >
                     <CircleMinus className="w-5 h-5" />
                   </button>
-                  
+
                   <div className="space-y-3">
                     <input
                       type="text"
@@ -141,9 +142,83 @@ export default function DashAbout() {
         </div>
 
         {/* Certifications */}
-        <div className=" rounded-2xl overflow-hidden">
-            <h3 className="text-lg font-semibold text-gray-800">Certifications</h3>
 
+        <div className="border-2 border-secondary rounded-2xl overflow-hidden">
+          <button
+            onClick={() => setIsCertifOpen(!isCertifOpen)}
+            className="w-full flex items-center justify-between p-4 bg-linear-to-r from-secondary/5 to-transparent hover:from-secondary/10 transition-all"
+          >
+            <h3 className=" text-gray-800">Certifications</h3>
+            <div className="flex items-center gap-2">
+              {diplomas.length > 0 && (
+                <span className="bg-secondary text-white text-xs px-2 py-1 rounded-full">
+                  {diplomas.length}
+                </span>
+              )}
+              {isCertifOpen ? (
+                <ChevronUp className="w-5 h-5 text-secondary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-secondary" />
+              )}
+            </div>
+          </button>
+
+          {isCertifOpen && (
+            <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
+              {diplomas.map((diploma) => (
+                <div key={diploma.id} className="space-y-4 p-4 bg-gray-50 rounded-lg relative">
+                  <button
+                    onClick={() => removeDiploma(diploma.id)}
+                    className="absolute top-2 right-2 text-red-500 hover:text-red-700 transition-colors"
+                  >
+                    <CircleMinus className="w-5 h-5" />
+                  </button>
+
+                  <div className="space-y-3">
+                    <input
+                      type="text"
+                      placeholder="Type et nom du diplôme"
+                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Lieu d'obtention"
+                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-primary">
+                        Date de début
+                      </label>
+                      <input
+                        type="month"
+                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-primary">
+                        Date de fin
+                      </label>
+                      <input
+                        type="month"
+                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <button
+                onClick={addDiploma}
+                className="flex items-center gap-2 text-secondary hover:text-secondary/80 font-medium transition-colors"
+              >
+                <CirclePlus className="w-5 h-5" />
+                Ajouter un diplôme
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
