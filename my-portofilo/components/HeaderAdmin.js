@@ -26,7 +26,7 @@ const HeaderAdmin = ({ onLogout }) => {
             <img
               src="/images/badge-logo-minimal.svg"
               alt="Logo - Retour en haut de page"
-              className="mt-5 md:h-20 md:w-30 hover:scale-110 transition-transform duration-300"
+              className="h-15 mt-5 md:h-20 md:w-30 hover:scale-110 transition-transform duration-300"
             />
             <h1 className="text-xl font-bold text-slate-800">Dashboard</h1>
           </div>

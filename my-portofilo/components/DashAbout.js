@@ -2,12 +2,14 @@
 
 export default function DashAbout() {
 
-  
-
   return (
     <section>
       <div>
-        <form></form>
+        <h1></h1>
+        <p></p>
+      </div>
+     <div>
+      
       </div>
       </section>
 
