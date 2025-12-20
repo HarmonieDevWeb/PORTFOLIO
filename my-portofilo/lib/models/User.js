@@ -4,7 +4,6 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, 'Le nom d\'utilisateur est requis'],
-    unique: true,
     trim: true,
     minlength: [3, 'Le nom d\'utilisateur doit contenir au moins 3 caractères']
   },
@@ -25,7 +24,6 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, 'L\'email est requis'],
-    unique: true,
     trim: true,
     lowercase: true,
     match: [/^\S+@\S+\.\S+$/, 'Email invalide']
@@ -34,6 +32,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: 'admin',
     enum: ['admin', 'user']
+  },
+  present: {
+    type: String
   },
   createdAt: {
     type: Date,

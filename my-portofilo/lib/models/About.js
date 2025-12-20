@@ -4,7 +4,7 @@ const aboutSchema = new mongoose.Schema({
   location: {
     localisation: { type: String },
     remote: { type: Boolean, default: false },
-    description: { type: String }
+    description: { type: String },
   },
   education: [
     {

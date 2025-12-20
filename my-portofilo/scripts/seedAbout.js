@@ -20,7 +20,7 @@ const aboutSchema = new mongoose.Schema({
   location: {
     localisation: { type: String },
     remote: { type: Boolean, default: false },
-    description: { type: String }
+    description: { type: String },
   },
   education: [
     {
@@ -73,7 +73,7 @@ const aboutData = {
   location: {
     localisation: "Le Mans (72), France",
     remote: false,
-    description: "je suis ouverte à des opportunités de collaboration à distance ou en présentiel dans la région."
+    description: "je suis ouverte à des opportunités de collaboration à distance ou en présentiel dans la région.",
   },
   education: [
     // Diplômes
@@ -128,12 +128,7 @@ const aboutData = {
       title: "Streameuse - Twitch",
       localisation: "En ligne"
     },
-        {
-      dateStart: "2010-01",
-      dateEnd: "2014-02",
-      title: "Serveuse - PUB Brasserie",
-      localisation: "Saint Flour"
-    },
+    
     {
       dateStart: "2010-02",
       dateEnd: "2010-03",
