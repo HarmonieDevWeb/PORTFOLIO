@@ -1,16 +1,43 @@
-{/* FOOTER */}
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Linkedin, Github, Send, ShieldUser} from "lucide-react";
 import "../app/globals.css";
 import Link from 'next/link'
-export default function Footer() {
 
+
+export default function Footer() {
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('/api/user');
+        if (!response.ok) throw new Error('Erreur réseau');
+        const data = await response.json();
+        setUserData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUserData();
+  }, []);
+
+    if (!userData) return null;
+
+  const { user } = userData;
     
     return (
         <footer className="bg-primary text-center py-8 md:py-10 mt-12 border-t border-gray-300">
                 <div className="mb-6 flex flex-col items-center gap-2">
-                <span className="text-white font-bold text-3xl md:text-4xl lg:text-5xl tracking-wide">
-                    HARMONIE CHEVREL
+                    { user && (
+                <span className="text-white font-bold uppercase not-odd:text-3xl md:text-4xl lg:text-5xl tracking-wide">
+                    {user.lastname} {user.firstname}
                 </span>
+                )}
                 <span className="text-background text-lg md:text-xl lg:text-2xl italic">
                     Développeuse Fullstack
                 </span>
@@ -50,7 +77,7 @@ export default function Footer() {
             </div>
             
             <p className="text-white/80 text-sm md:text-base">
-                &copy; {new Date().getFullYear()} Harmonie Dev Web. Tous droits réservés.
+                &copy; {new Date().getFullYear()} {user.username}. Tous droits réservés.
             </p>
             
         </footer>
