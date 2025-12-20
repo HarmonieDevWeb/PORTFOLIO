@@ -9,6 +9,7 @@ import Link from 'next/link'
 export default function Footer() {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
