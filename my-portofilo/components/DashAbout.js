@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState,  useEffect} from "react";
 import { CirclePlus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function DashAbout() {
@@ -194,9 +194,15 @@ export default function DashAbout() {
         <h1 className="uppercase">
           à propos de moi
         </h1>
-        <p className="text-gray-600">
-          Modifies tes informations personnelles
-        </p>
+        <div className="space-y-3">
+          <textarea 
+            placeholder="Ma présentation en quelques mots" 
+            value=""
+            onChange={(e) => updatePresent('description', e.target.value)}
+            className="w-full shadow-lg rounded-lg p-3 border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all bg-white"
+            rows={3}
+          />
+        </div>
       </div>
 
       {/* Localisation */}
