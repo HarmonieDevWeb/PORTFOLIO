@@ -2,33 +2,30 @@ import mongoose from 'mongoose';
 
 const aboutSchema = new mongoose.Schema({
   location: {
-    city: { type: String, default: "Le Mans" },
-    region: { type: String, default: "Pays de la Loire" },
-    country: { type: String, default: "France" },
-    remote: { type: Boolean, default: true },
+    localisation: { type: String },
+    remote: { type: Boolean, default: false },
     description: { type: String }
   },
   education: [
     {
-      year: { type: String, required: true },
+      // Utiliser directement le format YYYY-MM d'un input type="month"
+      dateStart: { type: String, required: true }, // Format: "YYYY-MM"
+      dateEnd: { type: String, required: true },   // Format: "YYYY-MM"
       title: { type: String, required: true },
-      institution: { type: String, required: true },
+      localisation: { type: String, required: true },
       type: {
         type: String,
-        enum: ["diploma", "certification", "mooc"],
+        enum: ["diploma", "certif"],
         required: true
       }
     }
   ],
   experience: [
     {
-      period: { type: String, required: true },
-      position: { type: String, required: true },
-      type: {
-        type: String,
-        enum: ["job", "freelance", "internship"],
-        default: "job"
-      }
+      dateStart: { type: String, required: true }, // Format: "YYYY-MM"
+      dateEnd: { type: String, required: true },   // Format: "YYYY-MM"
+      localisation: { type: String, required: true },
+      title: { type: String, required: true } // Changé de "type" à "title" pour clarté
     }
   ],
   languages: [
@@ -36,9 +33,17 @@ const aboutSchema = new mongoose.Schema({
       name: { type: String, required: true },
       level: {
         type: String,
-        enum: ["native", "fluent", "intermediate", "beginner"],
+        enum: ["Débutant", "Scolaire", "Intermédiaire", "Maîtrise", "Bilingue"],
         required: true
       }
+    }
+  ],
+  // Pour les sections dynamiques personnalisées (hobbies, centres d'intérêt, etc.)
+  others: [
+    {
+      label: { type: String, required: true },  // Nom de la section (ex: "Hobbies")
+      title: { type: String, required: true },  // Titre de l'élément
+      content: { type: String, required: true } // Contenu/description
     }
   ],
   updatedAt: { type: Date, default: Date.now }

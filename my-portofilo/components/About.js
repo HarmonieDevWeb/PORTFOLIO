@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronsDown, MapPin, GraduationCap, Briefcase, Languages, Loader2 } from 'lucide-react';
+import { ChevronsDown, MapPin, GraduationCap, Briefcase, Languages, Sparkles, Loader2 } from 'lucide-react';
 
 export default function About() {
   const [aboutData, setAboutData] = useState(null);
@@ -12,10 +12,8 @@ export default function About() {
     const fetchAboutData = async () => {
       try {
         const response = await fetch('/api/about');
-        if (!response.ok) {
-          throw new Error('Erreur lors du chargement des données');
-        }
         const data = await response.json();
+        console.log('📊 Données reçues:', data);
         setAboutData(data);
       } catch (err) {
         setError(err.message);
@@ -23,15 +21,22 @@ export default function About() {
         setLoading(false);
       }
     };
-
     fetchAboutData();
   }, []);
+
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  // Formater la date YYYY-MM en MM/YYYY
+  const formatDate = (dateStr) => {
+    if (!dateStr) return '';
+    const [year, month] = dateStr.split('-');
+    return `${month}/${year}`;
   };
 
   if (loading) {
@@ -56,15 +61,24 @@ export default function About() {
 
   if (!aboutData) return null;
 
-  const { location, education, experience, languages } = aboutData;
+  const { location, education, experience, languages, others } = aboutData;
 
   // Grouper les formations par type
   const diplomas = education?.filter(edu => edu.type === 'diploma') || [];
-  const certifications = education?.filter(edu => edu.type === 'certification' || edu.type === 'mooc') || [];
+  const certifications = education?.filter(edu => edu.type === 'certif') || [];
+
+  // Grouper les "others" par label
+  const groupedOthers = others?.reduce((acc, item) => {
+    if (!acc[item.label]) {
+      acc[item.label] = [];
+    }
+    acc[item.label].push(item);
+    return acc;
+  }, {}) || {};
 
   return (
-    <section 
-      id="about" 
+    <section
+      id="about"
       className="mb-16 px-4 pt-5 md:px-6 md:pt-10 lg:px-8 lg:pt-15 max-w-7xl mx-auto"
     >
       {/* Titre de section */}
@@ -75,7 +89,7 @@ export default function About() {
 
       {/* Grille de contenu */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
+
         {/* Localisation */}
         {location && (
           <article className="mt-4 p-6 rounded-lg shadow-md border-l-4 border-secondary bg-white hover:shadow-lg transition-shadow">
@@ -83,8 +97,11 @@ export default function About() {
               <MapPin className="text-secondary" size={24} />
               <h3 className="text-2xl font-semibold">Localisation</h3>
             </div>
-            <p className="text-lg pl-2 leading-7 text-gray-700 italic">
-              {location.description || `Basée à ${location.city}, ${location.region}, ${location.country}`}
+            <p className="pl-2 leading-7 text-gray-700">
+              Basée à {location.localisation},   </p>
+              <p className="pl-2 leading-7 text-gray-700">
+              {location.description}
+              {location.remote && <p className="italic">Disponible en télétravail, </p>}
             </p>
           </article>
         )}
@@ -103,20 +120,20 @@ export default function About() {
                   <ul className="list-disc list-inside pl-3 space-y-1 mb-4">
                     {diplomas.map((edu, index) => (
                       <li key={index}>
-                        {edu.year} : {edu.title} {edu.institution}
+                        {formatDate(edu.dateEnd)} : {edu.title} - {edu.localisation}
                       </li>
                     ))}
                   </ul>
                 </>
               )}
-              
+
               {certifications.length > 0 && (
                 <>
                   <h4 className="text-lg font-semibold mb-2 text-gray-800">Certifications</h4>
                   <ul className="list-disc list-inside pl-3 space-y-1">
                     {certifications.map((cert, index) => (
                       <li key={index}>
-                        {cert.year} : {cert.title}  {cert.institution}
+                        {formatDate(cert.dateEnd)} : {cert.title} - {cert.localisation}
                       </li>
                     ))}
                   </ul>
@@ -136,8 +153,7 @@ export default function About() {
             <ul className="list-disc list-inside pl-3 space-y-1 text-base leading-7 text-gray-700">
               {experience.map((exp, index) => (
                 <li key={index}>
-                  {exp.period} : {exp.position}
-                  {exp.type === 'freelance' && ' (Auto-entrepreneur)'}
+                  {formatDate(exp.dateStart)} - {formatDate(exp.dateEnd)} : {exp.title} - {exp.localisation}
                 </li>
               ))}
             </ul>
@@ -152,22 +168,37 @@ export default function About() {
               <h3 className="text-2xl font-semibold">Langues</h3>
             </div>
             <ul className="list-disc list-inside pl-3 space-y-1 text-base leading-7 text-gray-700">
-              {languages.map((lang, index) => {
-                const levelLabel = {
-                  native: 'Langue maternelle',
-                  fluent: 'Courant',
-                  advanced: 'Avancé',
-                  intermediate: 'Niveau intermédiaire',
-                  beginner: 'Débutant'
-                };
-                return (
-                  <li key={index}>
-                    {lang.name} : {levelLabel[lang.level] || lang.level}
-                  </li>
-                );
-              })}
+              {languages.map((lang, index) => (
+                <li key={index}>
+                  {lang.name} : {lang.level}
+                </li>
+              ))}
             </ul>
           </article>
+        )}
+
+        {/* Sections "Autres" dynamiques */}
+        {Object.keys(groupedOthers).length > 0 && (
+          <>
+            {Object.entries(groupedOthers).map(([label, items]) => (
+              <article
+                key={label}
+                className="mt-4 p-6 rounded-lg shadow-md border-l-4 border-secondary bg-white hover:shadow-lg transition-shadow"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <Sparkles className="text-secondary" size={24} />
+                  <h3 className="text-2xl font-semibold">{label}</h3>
+                </div>
+                <ul className="list-disc list-inside pl-3 space-y-2 text-base leading-7 text-gray-700">
+                  {items.map((item, index) => (
+                    <li key={index}>
+                      <strong>{item.title}</strong> : {item.content}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </>
         )}
       </div>
 

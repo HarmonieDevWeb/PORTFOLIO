@@ -7,7 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "seed": "node scripts/seedProjects.js seedAbout.js seedSkills.js",
+     "seed:projects": "node scripts/seedProjects.js",
+    "seed:about": "node scripts/seedAbout.js",
+    "seed:skills": "node scripts/seedSkills.js",
+    "seed:all": "node scripts/seedProjects.js && node scripts/seedAbout.js && node scripts/seedSkills.js",
     "create-user": "node scripts/createUser.js",
     "lint": "npx next lint",
     "lint:fix": "npx next lint --fix"
