@@ -5,24 +5,24 @@ import { ChevronsDown, Loader2, Github, MessageCircleMore } from "lucide-react";
 
 
 export default function Hero() {
-  const [aboutData, setAboutData] = useState(null);
+  const [userData, UserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchAboutData = async () => {
+    const fetchuserData = async () => {
       try {
         const response = await fetch('/api/user');
         const data = await response.json();
         console.log('📊 Données reçues:', data);
-        setAboutData(data);
+        UserData(data);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-    fetchAboutData();
+    fetchuserData();
   }, []);
 
   if (loading) {
@@ -45,9 +45,9 @@ export default function Hero() {
     );
   }
 
-  if (!aboutData) return null;
+  if (!userData) return null;
 
-  const { user } = aboutData;
+  const { user } = userData;
 
 
   const handleScrollToAbout = () => {
