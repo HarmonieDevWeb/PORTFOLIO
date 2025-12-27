@@ -45,7 +45,7 @@ h3 {
 
 h4 {
   color: var(--color-text);
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1.1rem, 2.5vw, 1.25rem);
   padding-left: 1rem;
   line-height: 1.5;
   font-weight: 500;

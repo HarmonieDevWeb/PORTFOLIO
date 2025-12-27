@@ -4,12 +4,11 @@ import { Link } from 'react-scroll';
 export default function DashPage() {
   const Sidebar = ({ activeTab, setActiveTab, isMobileOpen, setIsMobileOpen }) => {
     const menuItems = [
-      { id: 'about', label: 'About', icon: User },
-      { id: 'skills', label: 'Skills', icon: Code },
-      { id: 'projects', label: 'Projetcts', icon: FolderOpen },
-      { id: 'blog', label: 'Blog', icon: ScanEye },
+      { id: 'about', href: 'about', label: 'About', icon: User },
+      { id: 'skills', href: 'skills', label: 'Skills', icon: Code },
+      { id: 'projects', href: 'projects', label: 'Projects', icon: FolderOpen },
+      { id: 'blog', href: 'blog', label: 'Blog', icon: ScanEye },
     ];
-
 
     return (
       <section className='flex flex-col w-9/10 p-2 border-b-2 border-r-2 border-secondary rounded-2xl'>

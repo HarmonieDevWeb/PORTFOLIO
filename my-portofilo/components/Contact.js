@@ -88,7 +88,7 @@ export default function Contact() {
         </div>
 
         {/* COLONNE DROITE : FORMULAIRE (INDISPONIBLE) */}
-        <div className="relative">
+        <div className="relative z-0">
           <form ref={form} onSubmit={handleSubmit} className="space-y-4">
             {/* Overlay d'indisponibilité */}
             <div className="absolute inset-0 z-20 bg-white/40 backdrop-blur-[2px] flex flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 p-4 text-center">
