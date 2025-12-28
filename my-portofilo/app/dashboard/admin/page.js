@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
-import Dashboard from '@/components/NavDash';
+import { useRef, useState } from 'react';
+import NavDash from '@/components/NavDash';
 import DashAbout from '@/components/DashAbout';
 import DashSkills from '@/components/DashSkills';
 import DashProjects from '@/components/DashProjects';
@@ -9,72 +9,55 @@ import DashBlog from '@/components/DashBlog';
 
 export default function AdminPage() {
   const scrollContainerRef = useRef(null);
+  const [activeTab, setActiveTab] = useState('about');
 
-  // Observer pour synchroniser le scroll avec la navigation
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      const sections = ['about', 'skills', 'projects', 'blog'];
-      const index = sections.indexOf(hash);
+  const sections = [
+    { id: 'about', component: <DashAbout /> },
+    { id: 'skills', component: <DashSkills /> },
+    { id: 'projects', component: <DashProjects /> },
+    { id: 'blog', component: <DashBlog /> },
+  ];
+
+  const handleNavigate = (id, index) => {
+    setActiveTab(id);
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const targetScroll = container.offsetWidth * index;
       
-      if (index !== -1 && scrollContainerRef.current) {
-        const sectionWidth = scrollContainerRef.current.offsetWidth;
-        scrollContainerRef.current.scrollTo({
-          left: sectionWidth * index,
-          behavior: 'smooth'
-        });
-      }
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+      container.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-white">
-      {/* Votre composant NavDash */}
-      <Dashboard />
+      {/* Navigation avec props de contrôle */}
+      <NavDash activeTab={activeTab} onNavigate={handleNavigate} />
 
-      {/* Container avec scroll horizontal */}
+      {/* Container de scroll horizontal */}
       <div
         ref={scrollContainerRef}
-        className="flex-1 flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth"
+        className="flex-1 flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        <style jsx>{`
-          div::-webkit-scrollbar {
-            display: none;
-          }
-        `}</style>
-        
-        {/* Section About */}
-        <div id="about" className="min-w-full h-full snap-start overflow-y-auto">
-          <div className="h-full py-8 px-4">
-            <DashAbout />
+        {sections.map((section) => (
+          <div 
+            key={section.id}
+            id={section.id}
+            className="min-w-full h-full snap-start overflow-y-auto"
+          >
+            <div className="p-8">
+              {section.component}
+            </div>
           </div>
-        </div>
-
-        {/* Section Skills */}
-        <div id="skills" className="min-w-full h-full snap-start overflow-y-auto">
-          <div className="h-full py-8 px-4">
-            <DashSkills />
-          </div>
-        </div>
-
-        {/* Section Projects */}
-        <div id="projects" className="min-w-full h-full snap-start overflow-y-auto">
-          <div className="h-full py-8 px-4">
-            <DashProjects />
-          </div>
-        </div>
-
-        {/* Section Blog */}
-        <div id="blog" className="min-w-full h-full snap-start overflow-y-auto">
-          <div className="h-full py-8 px-4">
-            <DashBlog />
-          </div>
-        </div>
+        ))}
       </div>
+
+      <style jsx global>{`
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+      `}</style>
     </div>
   );
 }
