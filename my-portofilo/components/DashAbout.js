@@ -37,6 +37,14 @@ export default function DashAbout() {
   const [isExpOpen, setIsExpOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
+  // États pour les données utilisateur
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    present: ""
+  });
+
   // États pour données (adaptés au schéma MongoDB)
   const [location, setLocation] = useState({
     localisation: "",
@@ -51,23 +59,38 @@ export default function DashAbout() {
 
   // Chargement des données depuis l'API
   useEffect(() => {
-    const fetchAboutData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('/api/about');
-        
-        if (!response.ok) {
+        // Charger les données utilisateur
+        const userResponse = await fetch('/api/user');
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          if (userData.success && userData.user) {
+            setUser({
+              firstname: userData.user.firstname || "",
+              lastname: userData.user.lastname || "",
+              email: userData.user.email || "",
+              present: userData.user.present || ""
+            });
+          }
+        }
+
+        // Charger les données About
+        const aboutResponse = await fetch('/api/about');
+
+        if (!aboutResponse.ok) {
           throw new Error('Erreur lors du chargement');
         }
-        
-        const data = await response.json();
-        console.log('📊 Données reçues:', data);
-        
-        if (data) {
-          setLocation(data.location || { localisation: "", remote: false, description: "" });
-          setEducation(data.education || []);
-          setExperience(data.experience || []);
-          setLanguages(data.languages || []);
-          setOthers(data.others || []);
+
+        const aboutData = await aboutResponse.json();
+        console.log('📊 Données reçues:', aboutData);
+
+        if (aboutData) {
+          setLocation(aboutData.location || { localisation: "", remote: false, description: "" });
+          setEducation(aboutData.education || []);
+          setExperience(aboutData.experience || []);
+          setLanguages(aboutData.languages || []);
+          setOthers(aboutData.others || []);
         }
       } catch (err) {
         console.error('Erreur:', err);
@@ -76,13 +99,18 @@ export default function DashAbout() {
         setLoading(false);
       }
     };
-    fetchAboutData();
+    fetchData();
   }, []);
+
+  // Gestion de la mise à jour de l'utilisateur
+  const updateUser = (field, value) => {
+    setUser(prev => ({ ...prev, [field]: value }));
+  };
 
   // Gestion de la sauvegarde
   const handleSave = async () => {
     setSaveStatus("saving");
-    
+
     const dataToSave = {
       location,
       education: education.filter(e => e.title?.trim()),
@@ -90,23 +118,37 @@ export default function DashAbout() {
       languages: languages.filter(l => l.name?.trim()),
       others: others.filter(o => o.title?.trim())
     };
-    
+
     try {
-      const response = await fetch('/api/about', {
+      // Sauvegarder les données About
+      const aboutResponse = await fetch('/api/about', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSave)
       });
 
-      const result = await response.json();
+      const aboutResult = await aboutResponse.json();
 
-      if (!response.ok) {
-        throw new Error(result.error || 'Erreur lors de la sauvegarde');
+      if (!aboutResponse.ok) {
+        throw new Error(aboutResult.error || 'Erreur lors de la sauvegarde');
       }
 
-      console.log("✅ Données sauvegardées:", result.data);
+      // Sauvegarder la présentation de l'utilisateur
+      const userResponse = await fetch('/api/user', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ present: user.present })
+      });
+
+      const userResult = await userResponse.json();
+
+      if (!userResponse.ok) {
+        console.warn('Erreur lors de la sauvegarde de la présentation:', userResult.error);
+      }
+
+      console.log("✅ Données sauvegardées:", aboutResult.data);
       setSaveStatus("success");
-      
+
       setTimeout(() => {
         setIsSaveModalOpen(false);
         setSaveStatus("idle");
@@ -152,7 +194,7 @@ export default function DashAbout() {
   };
 
   const updateDiploma = (id, field, value) => {
-    setEducation(education.map(e => 
+    setEducation(education.map(e =>
       e.id === id ? { ...e, [field]: value } : e
     ));
   };
@@ -174,7 +216,7 @@ export default function DashAbout() {
   };
 
   const updateCertif = (id, field, value) => {
-    setEducation(education.map(e => 
+    setEducation(education.map(e =>
       e.id === id ? { ...e, [field]: value } : e
     ));
   };
@@ -195,7 +237,7 @@ export default function DashAbout() {
   };
 
   const updateExperience = (id, field, value) => {
-    setExperience(experience.map(e => 
+    setExperience(experience.map(e =>
       e.id === id ? { ...e, [field]: value } : e
     ));
   };
@@ -214,7 +256,7 @@ export default function DashAbout() {
   };
 
   const updateLanguage = (id, field, value) => {
-    setLanguages(languages.map(l => 
+    setLanguages(languages.map(l =>
       l.id === id ? { ...l, [field]: value } : l
     ));
   };
@@ -234,7 +276,7 @@ export default function DashAbout() {
   };
 
   const updateOther = (id, field, value) => {
-    setOthers(others.map(o => 
+    setOthers(others.map(o =>
       o.id === id ? { ...o, [field]: value } : o
     ));
   };
@@ -269,6 +311,50 @@ export default function DashAbout() {
   return (
     <>
       <section className="max-w-4xl mx-auto px-6 py-8 pb-24 space-y-10">
+        {/* Présentation de l'utilisateur */}
+        <div className="space-y-6">
+        <div className="space-y-4 pb-6 border-b-2 border-secondary">
+          <div className="space-y-2">
+            <h1 className="text-2xl font-bold text-primary">{user.firstname} {user.lastname}</h1>
+          <p className="text-gray-600">{user.email}</p>
+          </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Votre prénom"
+                value={user.firstname}
+                onChange={(e) => updateUser('firstname', e.target.value)}
+                className="w-full shadow-lg rounded-lg p-3 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all bg-white"
+              />
+              <input
+                type="text"
+                placeholder="Votre nom"
+                value={user.lastname}
+                onChange={(e) => updateUser('lastname', e.target.value)}
+                className="w-full shadow-lg rounded-lg p-3 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all bg-white mt-2"
+              />
+              <input
+                type="email"
+                placeholder="Votre email"
+                value={user.email}
+                onChange={(e) => updateUser('email', e.target.value)}
+                className="w-full shadow-lg rounded-lg p-3 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all bg-white mt-2"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-700">Ma présentation</label>
+            <textarea
+              placeholder="Présentez-vous en quelques mots..."
+              value={user.present}
+              onChange={(e) => updateUser('present', e.target.value)}
+              className="w-full shadow-lg rounded-lg p-3 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all bg-white"
+              rows={4}
+            />
+          </div>
+        </div>
+
         {/* Localisation */}
         <div className="space-y-4">
           <h4 className="text-lg font-semibold text-primary">Localisation</h4>
@@ -287,7 +373,7 @@ export default function DashAbout() {
                 onChange={(e) => updateLocation('remote', e.target.checked)}
                 className="w-4 h-4 text-secondary border-gray-300 rounded focus:ring-secondary"
               />
-              <span className="text-gray-700">Disponible en télétravail</span>
+              <span className="text-gray-700 ml-2">Disponible en télétravail</span>
             </label>
             <textarea
               placeholder="Description"
