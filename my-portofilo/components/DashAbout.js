@@ -313,11 +313,11 @@ export default function DashAbout() {
       <section className="max-w-4xl mx-auto px-6 py-8 pb-24 space-y-10">
         {/* Présentation de l'utilisateur */}
         <div className="space-y-6">
-        <div className="space-y-4 pb-6 border-b-2 border-secondary">
-          <div className="space-y-2">
-            <h1 className="text-2xl font-bold text-primary">{user.firstname} {user.lastname}</h1>
-          <p className="text-gray-600">{user.email}</p>
-          </div>
+          <div className="space-y-4 pb-6 border-b-2 border-secondary">
+            <div className="space-y-2">
+              <h1 className="text-2xl font-bold text-primary">{user.firstname} {user.lastname}</h1>
+              <p className="text-gray-600">{user.email}</p>
+            </div>
             <div>
               <input
                 type="text"
@@ -407,43 +407,44 @@ export default function DashAbout() {
             </button>
 
             {isDiplomaOpen && (
-              <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
+              <div className="p-6 space-y-6 bg-white border-t border-secondary/20 ">
                 {diplomas.map((diploma) => (
-                  <div key={diploma.id} className="space-y-4 p-6 bg-background/30 rounded-lg relative">
+                  <div key={diploma.id} className="space-y-4 p-6 rounded-lg relative border-b border-gray-200 ">
                     <button
                       onClick={() => removeDiploma(diploma.id)}
-                      className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors"
+                      className="absolute top-1 right-1 text-red-500 hover:text-red-700 transition-colors"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-4 h-4 text-red-500 absolute top-1 right-1" />
                     </button>
-
-                    <input
-                      type="text"
-                      placeholder="Nom du diplôme"
-                      value={diploma.title}
-                      onChange={(e) => updateDiploma(diploma.id, 'title', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Lieu"
-                      value={diploma.localisation}
-                      onChange={(e) => updateDiploma(diploma.id, 'localisation', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
-                    />
+                    <div className="grid grid-cols-2 gap-4">
+                      <input
+                        type="text"
+                        placeholder="Nom du diplôme"
+                        value={diploma.title}
+                        onChange={(e) => updateDiploma(diploma.id, 'title', e.target.value)}
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Lieu"
+                        value={diploma.localisation}
+                        onChange={(e) => updateDiploma(diploma.id, 'localisation', e.target.value)}
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      />
+                    </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <input
                         type="month"
                         value={diploma.dateStart}
                         onChange={(e) => updateDiploma(diploma.id, 'dateStart', e.target.value)}
-                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                       />
                       <input
                         type="month"
                         value={diploma.dateEnd}
                         onChange={(e) => updateDiploma(diploma.id, 'dateEnd', e.target.value)}
-                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                       />
                     </div>
                   </div>
@@ -478,43 +479,44 @@ export default function DashAbout() {
             </button>
 
             {isCertifOpen && (
-              <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
+              <div className="p-6 space-y-6 bg-white border-t border-secondary/20 ">
                 {certifs.map((certif) => (
-                  <div key={certif.id} className="space-y-4 p-6 bg-background/30 rounded-lg relative">
+                  <div key={certif.id} className="space-y-4 p-6 rounded-lg relative justify-between mb-4 border-b border-gray-200 ">
                     <button
                       onClick={() => removeCertif(certif.id)}
-                      className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors"
+                      className="p-1 hover:bg-red-100 rounded-full transition-colors "
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-4 h-4 text-red-500 absolute top-1 right-1" />
                     </button>
-
-                    <input
-                      type="text"
-                      placeholder="Nom de la certification"
-                      value={certif.title}
-                      onChange={(e) => updateCertif(certif.id, 'title', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Lieu"
-                      value={certif.localisation}
-                      onChange={(e) => updateCertif(certif.id, 'localisation', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
-                    />
+                    <div className="grid grid-cols-2 gap-4">
+                      <input
+                        type="text"
+                        placeholder="Nom de la certification"
+                        value={certif.title}
+                        onChange={(e) => updateCertif(certif.id, 'title', e.target.value)}
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Lieu"
+                        value={certif.localisation}
+                        onChange={(e) => updateCertif(certif.id, 'localisation', e.target.value)}
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      />
+                    </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <input
                         type="month"
                         value={certif.dateStart}
                         onChange={(e) => updateCertif(certif.id, 'dateStart', e.target.value)}
-                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                       />
                       <input
                         type="month"
                         value={certif.dateEnd}
                         onChange={(e) => updateCertif(certif.id, 'dateEnd', e.target.value)}
-                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                       />
                     </div>
                   </div>
@@ -553,43 +555,43 @@ export default function DashAbout() {
             </button>
 
             {isExpOpen && (
-              <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
+              <div className="p-6 space-y-6 bg-white border-t border-secondary/20 ">
                 {experience.map((exp) => (
-                  <div key={exp.id} className="space-y-4 p-6 bg-background/30 rounded-lg relative">
+                  <div key={exp.id} className="space-y-4 p-6 rounded-lg relative border-b border-gray-200 ">
                     <button
                       onClick={() => removeExperience(exp.id)}
                       className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-4 h-4 absolute top-1 right-1" />
                     </button>
-
-                    <input
-                      type="text"
-                      placeholder="Titre du poste"
-                      value={exp.title}
-                      onChange={(e) => updateExperience(exp.id, 'title', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Lieu"
-                      value={exp.localisation}
-                      onChange={(e) => updateExperience(exp.id, 'localisation', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
-                    />
-
+                    <div className="grid grid-cols-2 gap-4">
+                      <input
+                        type="text"
+                        placeholder="Titre du poste"
+                        value={exp.title}
+                        onChange={(e) => updateExperience(exp.id, 'title', e.target.value)}
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Lieu"
+                        value={exp.localisation}
+                        onChange={(e) => updateExperience(exp.id, 'localisation', e.target.value)}
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      />
+                    </div>
                     <div className="grid grid-cols-2 gap-4">
                       <input
                         type="month"
                         value={exp.dateStart}
                         onChange={(e) => updateExperience(exp.id, 'dateStart', e.target.value)}
-                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                       />
                       <input
                         type="month"
                         value={exp.dateEnd}
                         onChange={(e) => updateExperience(exp.id, 'dateEnd', e.target.value)}
-                        className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                        className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                       />
                     </div>
                   </div>
@@ -628,14 +630,14 @@ export default function DashAbout() {
             </button>
 
             {isLanguageOpen && (
-              <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
+              <div className="p-6 space-y-6 bg-white border-t border-secondary/20 ">
                 {languages.map((lang) => (
-                  <div key={lang.id} className="space-y-4 p-6 bg-background/30 rounded-lg relative">
+                  <div key={lang.id} className="space-y-4 p-6 rounded-lg relative border-b border-gray-200 ">
                     <button
                       onClick={() => removeLanguage(lang.id)}
-                      className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors"
+                      className="absolute top-1 right-1 text-red-500 hover:text-red-700 transition-colors"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-4 h-4 text-red-500 absolute top-1 right-1" />
                     </button>
 
                     <input
@@ -643,12 +645,12 @@ export default function DashAbout() {
                       placeholder="Nom de la langue"
                       value={lang.name}
                       onChange={(e) => updateLanguage(lang.id, 'name', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                     />
                     <select
                       value={lang.level}
                       onChange={(e) => updateLanguage(lang.id, 'level', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                     >
                       <option>Débutant</option>
                       <option>Scolaire</option>
@@ -690,14 +692,14 @@ export default function DashAbout() {
                 <h3 className="font-semibold">{label}</h3>
               </div>
 
-              <div className="p-6 space-y-6 bg-white border-t border-secondary/20">
+              <div className="p-6 space-y-6 bg-white border-t border-secondary/20 ">
                 {items.map((item) => (
-                  <div key={`other-${item.id}`} className="space-y-4 p-6 bg-background/30 rounded-lg relative">
+                  <div key={`other-${item.id}`} className="space-y-4 p-6 rounded-lg relative border-b border-gray-200">
                     <button
                       onClick={() => removeOther(item.id)}
-                      className="absolute top-4 right-4 text-red-500 hover:text-red-700 transition-colors"
+                      className="absolute top-1 right-1 text-red-500 hover:text-red-700 transition-colors"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-4 h-4 text-red-500 absolute top-1 right-1" />
                     </button>
 
                     <input
@@ -705,13 +707,13 @@ export default function DashAbout() {
                       placeholder="Titre"
                       value={item.title}
                       onChange={(e) => updateOther(item.id, 'title', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                     />
                     <textarea
                       placeholder="Contenu"
                       value={item.content}
                       onChange={(e) => updateOther(item.id, 'content', e.target.value)}
-                      className="w-full bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
+                      className="w-2/3 bg-white shadow-sm rounded-lg px-4 py-2 border border-gray-200 focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all"
                       rows={3}
                     />
                   </div>

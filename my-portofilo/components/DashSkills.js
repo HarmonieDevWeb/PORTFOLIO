@@ -45,7 +45,7 @@ export default function DashSkills() {
       {
         name: "",
         level: "",
-        status: "",
+        status: ['En découverte', 'En apprentissage', 'Acquis'],
         icon: ""
       }
     ],
@@ -70,43 +70,43 @@ export default function DashSkills() {
         name: "",
         level: "",
         status: "",
-        icon: ""
+        icon: []
       }
     ]
   });
 
   //Chagement des données API
-useEffect(() => {
-  async function fetchSkills() {
-    try {
-      const response = await fetch('/api/skills');
-      if (!response.ok) {
-        throw new Error('Erreur lors de la récupération des compétences');
+  useEffect(() => {
+    async function fetchSkills() {
+      try {
+        const response = await fetch('/api/skills');
+        if (!response.ok) {
+          throw new Error('Erreur lors de la récupération des compétences');
+        }
+
+        const res = await response.json(); // 'res' contient { success, skills, count }
+
+        // On récupère le tableau qui est dans res.skills
+        const skillsArray = res.skills || [];
+
+        // Organisation par catégorie
+        const organizedSkills = {
+          soft: skillsArray.filter(skill => skill.category === 'Softskill'),
+          hard: skillsArray.filter(skill => skill.category === 'HardSkill'),
+          tool: skillsArray.filter(skill => skill.category === 'Tool'),
+          method: skillsArray.filter(skill => skill.category === 'Method'),
+        };
+
+        setSkills(organizedSkills);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
       }
-      
-      const res = await response.json(); // 'res' contient { success, skills, count }
-      
-      // On récupère le tableau qui est dans res.skills
-      const skillsArray = res.skills || [];
-
-      // Organisation par catégorie
-      const organizedSkills = {
-        soft: skillsArray.filter(skill => skill.category === 'Softskill'),
-        hard: skillsArray.filter(skill => skill.category === 'HardSkill'),
-        tool: skillsArray.filter(skill => skill.category === 'Tool'),
-        method: skillsArray.filter(skill => skill.category === 'Method'),
-      };
-      
-      setSkills(organizedSkills);
-      setLoading(false);
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
     }
-  }
 
-  fetchSkills();
-}, []);
+    fetchSkills();
+  }, []);
 
   if (loading) {
     return <div>Chargement des compétences...</div>;
@@ -116,50 +116,50 @@ useEffect(() => {
     return <div>Erreur : {error}</div>;
   }
 
-    const remoteSkill = (category, index) => {
+  const remoteSkill = (category, index) => {
     const updatedSkills = { ...skills };
     updatedSkills[category].splice(index, 1);
     setSkills(updatedSkills);
   };
 
-  const updateSkill=(category, index, field, value) => {
+  const updateSkill = (category, index, field, value) => {
     const updatedSkills = { ...skills };
     updatedSkills[category][index][field] = value;
     setSkills(updatedSkills);
   };
 
-const handleSave = async () => {
-  setSaveStatus("saving");
+  const handleSave = async () => {
+    setSaveStatus("saving");
 
-  try {
-    const response = await fetch('/api/skills', {
-      method: 'POST', // Assurez-vous d'avoir une route POST côté API
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(skills),
-    });
+    try {
+      const response = await fetch('/api/skills', {
+        method: 'POST', // Assurez-vous d'avoir une route POST côté API
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(skills),
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (!response.ok) {
-      throw new Error(result.error || 'Erreur lors de la sauvegarde');
+      if (!response.ok) {
+        throw new Error(result.error || 'Erreur lors de la sauvegarde');
+      }
+
+      setSaveStatus("success");
+      setIsSaveModalOpen(false); // Fermer la modal après succès
+    } catch (err) {
+      console.error(err);
+      setSaveStatus("error");
     }
-    
-    setSaveStatus("success");
-    setIsSaveModalOpen(false); // Fermer la modal après succès
-  } catch (err) {
-    console.error(err);
-    setSaveStatus("error");
-  }
-};
+  };
 
 
 
 
 
   return (
-    <section className="p-6 bg-white rounded-2xl shadow-md">
+    <section className="max-w-4xl mx-auto px-6 py-8 pb-24 space-y-10">
 
 
       {/* Modals */}
@@ -231,10 +231,10 @@ const handleSave = async () => {
 
       {/* Sections des compétences */}
       {/* Soft Skills Section */}
-      <div className="mb-6">
+      <div className="border-2 border-secondary rounded-2xl overflow-hidden shadow-sm">
         <div
-          className="flex items-center justify-between cursor-pointer"
-          onClick={() => setIsSoftSkillOpen(!isSoftSkillOpen)}   
+          className="w-full flex items-center justify-between p-4 bg-linear-to-r from-secondary/10 to-transparent hover:from-secondary/20 transition-all"
+          onClick={() => setIsSoftSkillOpen(!isSoftSkillOpen)}
         >
           <h3 className="text-xl font-semibold text-primary">Soft Skills</h3>
           {isSoftSkillOpen ? (
@@ -247,18 +247,17 @@ const handleSave = async () => {
           <div className="mt-4 space-y-4">
             {skills.soft.map((skill, index) => (
               <div key={index} className="p-4 border border-gray-200 rounded-lg">
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-lg font-semibold text-gray-700">Compétence {index + 1}</h4>
+                <div className="relative flex items-center justify-between mb-4">
                   <button
                     onClick={() => remoteSkill('soft', index)}
-                    className="p-1 hover:bg-red-100 rounded-full transition-colors"
+                    className="absolute right-1 top-1 p-1 hover:bg-red-100 rounded-full transition-colors"
                   >
                     <Trash2 className="w-5 h-5 text-red-500" />
                   </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <label className="block">
-                    <span className="text-gray-700    ">Nom de la Compétence</span>                                         
+                    <span className="text-gray-700    ">Nom de la Compétence</span>
                     <input
                       type="text"
                       value={skill.name}
@@ -268,16 +267,19 @@ const handleSave = async () => {
                   </label>
                   <label className="block">
                     <span className="text-gray-700">Niveau</span>
-                    <input
-                      type="text"
-                      value={skill.level}
-                      onChange={(e) => updateSkill('soft', index, 'level', e.target.value)}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    />
+                    <div className="flex items-center">
+                      <input
+                        type="text"
+                        value={skill.level}
+                        onChange={(e) => updateSkill('soft', index, 'level', e.target.value)}
+                        className="mt-1 block w-1/10 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      />
+                      <span className="text-gray-700 ml-2"> /10</span>
+                    </div>
                   </label>
                   <label className="block">
                     <span className="text-gray-
-700">Statut</span>  
+700">Statut</span>
                     <input
                       type="text"
                       value={skill.status}
@@ -288,7 +290,7 @@ const handleSave = async () => {
                   <label className="block">
                     <span className="text-gray-700">Icône</span>
                     <input
-                      type="text"
+                      type="select"
                       value={skill.icon}
                       onChange={(e) => updateSkill('soft', index, 'icon', e.target.value)}
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
