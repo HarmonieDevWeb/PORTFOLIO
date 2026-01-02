@@ -140,6 +140,7 @@ export default function DashSkills() {
 
 
   return (
+      <>
     <section className="max-w-4xl mx-auto px-6 py-8 pb-24 space-y-10">
 
 
@@ -212,7 +213,7 @@ export default function DashSkills() {
 
       {/* Sections des compétences */}
       {/* hard Skills Section */}
-      <div className="border-2 border-secondary rounded-2xl overflow-hidden shadow-sm">
+      <div className="border-2 border-secondary rounded-4xl overflow-hidden shadow-sm">
         <div
           className="w-full flex items-center justify-between p-4 bg-linear-to-r from-secondary/10 to-transparent hover:from-secondary/20 transition-all"
           onClick={() => setIsHardSkillOpen(!isHardSkillOpen)}
@@ -322,10 +323,19 @@ export default function DashSkills() {
         )}
       </div>
 
-      {/* Répéter des sections similaires pour Hard Skills, Tools, Methods */}
-      {/* Hard Skills Section */}
-      {/* Tools Section */}
-      {/* Methods Section */}
     </section>
+
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg z-40">
+      <div className="max-w-4xl mx-auto">
+        <button
+          onClick={() => setIsSaveModalOpen(true)}
+          className="w-full bg-linear-to-r from-secondary to-accent text-white font-semibold py-3 px-6 rounded-full hover:shadow-lg transition-all flex items-center justify-center gap-2"
+        >
+          <Save className="w-5 h-5" />
+          Sauvegarder
+        </button>
+      </div>
+    </div>
+  </>
   );
 }

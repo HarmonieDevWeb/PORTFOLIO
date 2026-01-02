@@ -26,6 +26,7 @@ export default function DashSkills() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   // États des modals
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isAddSectionModalOpen, setIsAddSectionModalOpen] = useState(false);
@@ -148,6 +149,7 @@ const [isToolOpen, setIsToolOpen] = useState(false);
 
 
   return (
+    <>
     <section className="max-w-4xl mx-auto px-6 py-8 pb-24 space-y-10">
 
 
@@ -220,7 +222,7 @@ const [isToolOpen, setIsToolOpen] = useState(false);
 
       {/* Sections des compétences */}
       {/* method Skills Section */}
-      <div className="border-2 border-secondary rounded-2xl overflow-hidden shadow-sm">
+      <div className="border-2 border-secondary rounded-4xl overflow-hidden shadow-sm">
         <div
           className="w-full flex items-center justify-between p-4 bg-linear-to-r from-secondary/10 to-transparent hover:from-secondary/20 transition-all"
           onClick={() => setIsMethodOpen(!isMethodOpen)}
@@ -331,7 +333,7 @@ const [isToolOpen, setIsToolOpen] = useState(false);
       </div>
 
             {/* Tools Skills Section */}
-      <div className="border-2 border-secondary rounded-2xl overflow-hidden shadow-sm mt-30">
+      <div className="border-2 border-secondary rounded-4xl overflow-hidden shadow-sm mt-30">
         <div
           className="w-full flex items-center justify-between p-4 bg-linear-to-r from-secondary/10 to-transparent hover:from-secondary/20 transition-all"
           onClick={() => setIsToolOpen(!isToolOpen)}
@@ -428,7 +430,7 @@ const [isToolOpen, setIsToolOpen] = useState(false);
               <button
                 onClick={() => {
                   const updatedSkills = { ...skills };
-                  updatedSkills.method.push({ name: "", level: "", status: "", icon: "" });
+                  updatedSkills.tool.push({ name: "", level: "", status: "", icon: "" });
                   setSkills(updatedSkills);
                 }}
                 className="mt-4 flex items-center px-4 py-2 bg-accent-500 text-secondary rounded-lg hover:bg-secondary-600 transition-colors"
@@ -442,5 +444,17 @@ const [isToolOpen, setIsToolOpen] = useState(false);
       </div>
 
     </section>
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg z-40">
+      <div className="max-w-4xl mx-auto">
+        <button
+          onClick={() => setIsSaveModalOpen(true)}
+          className="w-full bg-linear-to-r from-secondary to-accent text-white font-semibold py-3 px-6 rounded-full hover:shadow-lg transition-all flex items-center justify-center gap-2"
+        >
+          <Save className="w-5 h-5" />
+          Sauvegarder
+        </button>
+      </div>
+    </div>
+  </>
   );
 }
