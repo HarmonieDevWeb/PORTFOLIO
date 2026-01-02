@@ -98,7 +98,7 @@ export default function About() {
               <h3 className="text-2xl font-semibold">Localisation</h3>
             </div>
             <p className="pl-2 leading-7 text-gray-700">
-              Basée à {location.localisation},   </p>
+              Basée à {location.localisation}  </p>
               <p className="pl-2 leading-7 text-gray-700">
               {location.description}
               {location.remote && <p className="italic">Disponible en télétravail, </p>}

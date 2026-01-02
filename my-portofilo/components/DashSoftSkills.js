@@ -1,7 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { CirclePlus, Trash2, ChevronDown, ChevronUp, Save, X } from "lucide-react";
-
+import * as Icons from "lucide-react";
 // Composant Modal réutilisable
 function Modal({ isOpen, onClose, title, children }) {
   if (!isOpen) return null;
@@ -38,6 +38,12 @@ export default function DashSkills() {
   //const [isToolOpen, setIsToolOpen] = useState(false);
   //const [isMethodOpen, setIsMethodOpen] = useState(false);
 
+  const SKILL_ICONS = [
+    'Brain', 'Users', 'MessageSquare', 'Target', 'Lightbulb',
+    'Heart', 'TrendingUp', 'Award', 'Zap', 'Star',
+    'BookOpen', 'Code', 'Database', 'Palette', 'Camera',
+    'Music', 'Wrench', 'Briefcase', 'CheckCircle', 'Clock'
+  ];
 
   // États pour les données skills
   const [skills, setSkills] = useState({
@@ -45,32 +51,8 @@ export default function DashSkills() {
       {
         name: "",
         level: "",
-        status: ['En découverte', 'En apprentissage', 'Acquis'],
-        icon: ""
-      }
-    ],
-    hard: [
-      {
-        name: "",
-        level: "",
         status: "",
         icon: ""
-      }
-    ],
-    tool: [
-      {
-        name: "",
-        level: "",
-        status: "",
-        icon: ""
-      }
-    ],
-    method: [
-      {
-        name: "",
-        level: "",
-        status: "",
-        icon: []
       }
     ]
   });
@@ -92,9 +74,6 @@ export default function DashSkills() {
         // Organisation par catégorie
         const organizedSkills = {
           soft: skillsArray.filter(skill => skill.category === 'Softskill'),
-          hard: skillsArray.filter(skill => skill.category === 'HardSkill'),
-          tool: skillsArray.filter(skill => skill.category === 'Tool'),
-          method: skillsArray.filter(skill => skill.category === 'Method'),
         };
 
         setSkills(organizedSkills);
@@ -153,9 +132,6 @@ export default function DashSkills() {
       setSaveStatus("error");
     }
   };
-
-
-
 
 
   return (
@@ -237,79 +213,106 @@ export default function DashSkills() {
           onClick={() => setIsSoftSkillOpen(!isSoftSkillOpen)}
         >
           <h3 className="text-xl font-semibold text-primary">Soft Skills</h3>
-          {isSoftSkillOpen ? (
-            <ChevronUp className="w-5 h-5 text-gray-500" />
-          ) : (
-            <ChevronDown className="w-5 h-5 text-gray-500" />
-          )}
+          <div className="flex items-center gap-2">
+            {skills?.soft.length > 0 && (
+                  <span className="bg-secondary text-white text-xs px-2 py-1 rounded-full font-medium">
+                {skills.soft.length} {skills.soft.length === 1}
+              </span>
+            )}
+            {isSoftSkillOpen ? (
+              <ChevronUp className="w-5 h-5 text-gray-500" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-gray-500" />
+            )}
+          </div>
+
         </div>
         {isSoftSkillOpen && (
-          <div className="mt-4 space-y-4">
-            {skills.soft.map((skill, index) => (
-              <div key={index} className="p-4 border border-gray-200 rounded-lg">
-                <div className="relative flex items-center justify-between mb-4">
-                  <button
-                    onClick={() => remoteSkill('soft', index)}
-                    className="absolute right-1 top-1 p-1 hover:bg-red-100 rounded-full transition-colors"
-                  >
-                    <Trash2 className="w-5 h-5 text-red-500" />
-                  </button>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <label className="block">
-                    <span className="text-gray-700    ">Nom de la Compétence</span>
-                    <input
-                      type="text"
-                      value={skill.name}
-                      onChange={(e) => updateSkill('soft', index, 'name', e.target.value)}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Niveau</span>
-                    <div className="flex items-center">
+          <div className="p-6 bg-white border-t border-secondary/20">
+            <div className="max-h-[600px] overflow-y-auto space-y-6 pr-2">
+              {skills.soft.map((skill, index) => (
+                <div key={index} className="p-4 border-b border-gray-200 rounded-lg">
+                  <div className="relative flex items-center justify-between mb-4">
+                    <button
+                      onClick={() => remoteSkill('soft', index)}
+                      className="absolute right-1 top-1 p-1 hover:bg-red-100 rounded-full transition-colors"
+                    >
+                      <Trash2 className="w-5 h-5 text-red-500" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label className="block">
+                      <span className="text-gray-700    ">Type</span>
                       <input
                         type="text"
-                        value={skill.level}
-                        onChange={(e) => updateSkill('soft', index, 'level', e.target.value)}
-                        className="mt-1 block w-1/10 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        value={skill.name}
+                        placeholder="Type de SoftSkill"
+                        onChange={(e) => updateSkill('soft', index, 'name', e.target.value)}
+                        className="mt-1 block w-2/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                       />
-                      <span className="text-gray-700 ml-2"> /10</span>
-                    </div>
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-
-700">Statut</span>
-                    <input
-                      type="text"
-                      value={skill.status}
-                      onChange={(e) => updateSkill('soft', index, 'status', e.target.value)}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="text-gray-700">Icône</span>
-                    <input
-                      type="select"
-                      value={skill.icon}
-                      onChange={(e) => updateSkill('soft', index, 'icon', e.target.value)}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </label>
+                    </label>
+                    <label className="block">
+                      <span className="text-gray-700">Niveau</span>
+                      <div className="flex items-center">
+                        <input
+                          type="text"
+                          value={skill.level}
+                          placeholder="1 à 10"
+                          onChange={(e) => updateSkill('soft', index, 'level', e.target.value)}
+                          className="mt-1 block w-1/4 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        />
+                        <span className="text-gray-700 ml-5"> /10</span>
+                      </div>
+                    </label>
+                    <label className="block">
+                      <span className="text-gray-700">Statut</span>
+                      <select
+                        value={skill.status}
+                        onChange={(e) => updateSkill('soft', index, 'status', e.target.value)}
+                        aria-placeholder="Selection du status"
+                        className="mt-1 block w-2/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value=""></option>
+                        <option value="En découverte">En découverte</option>
+                        <option value="En apprentissage">En apprentissage</option>
+                        <option value="Acquis">Acquis</option>
+                      </select>
+                    </label>
+                    <label className="block">
+                      <span className="text-gray-700">Icône</span>
+                      <div className="flex items-center gap-2">
+                        <select
+                          value={skill.icon}
+                          onChange={(e) => updateSkill('soft', index, 'icon', e.target.value)}
+                          className="mt-1 block w-1/4 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        >
+                          <option value="" ></option>
+                          {SKILL_ICONS.map((iconName) => (
+                            <option key={iconName} value={iconName}>
+                              {iconName}
+                            </option>
+                          ))}
+                        </select>
+                        {skill.icon && Icons[skill.icon] && (
+                          React.createElement(Icons[skill.icon], { className: "ml-5 w-8 h-8 text-primary" })
+                        )}
+                      </div>
+                    </label>
+                  </div>
                 </div>
-              </div>
-            ))}
-            <button
-              onClick={() => {
-                const updatedSkills = { ...skills };
-                updatedSkills.soft.push({ name: "", level: "", status: "", icon: "" });
-                setSkills(updatedSkills);
-              }}
-              className="mt-4 flex items-center px-4 py-2 bg-accent-500 text-secondary rounded-lg hover:bg-secondary-600 transition-colors"
-            >
-              <CirclePlus className="w-5 h-5 mr-2" />
-              Ajouter une Compétence
-            </button>
+              ))}
+              <button
+                onClick={() => {
+                  const updatedSkills = { ...skills };
+                  updatedSkills.soft.push({ name: "", level: "", status: "", icon: "" });
+                  setSkills(updatedSkills);
+                }}
+                className="mt-4 flex items-center px-4 py-2 bg-accent-500 text-secondary rounded-lg hover:bg-secondary-600 transition-colors"
+              >
+                <CirclePlus className="w-5 h-5 mr-2" />
+                Ajouter une Compétence
+              </button>
+            </div>
           </div>
         )}
       </div>

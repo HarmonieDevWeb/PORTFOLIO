@@ -3,7 +3,9 @@
 import { useRef, useState } from 'react';
 import NavDash from '@/components/NavDash';
 import DashAbout from '@/components/DashAbout';
-import DashSkills from '@/components/DashSkills';
+import DashSoftSkills from '@/components/DashSoftSkills';
+import DashHardSkills from '@/components/DashHardSkills';
+import DashMethodTool from '@/components/DashMethodTool';
 import DashProjects from '@/components/DashProjects';
 import DashBlog from '@/components/DashBlog';
 
@@ -13,7 +15,16 @@ export default function AdminPage() {
 
   const sections = [
     { id: 'about', component: <DashAbout /> },
-    { id: 'skills', component: <DashSkills /> },
+    { 
+      id: 'skills', 
+      component: (
+        <>
+          <DashSoftSkills />
+          <DashHardSkills />
+          <DashMethodTool />
+        </>
+      )
+    },
     { id: 'projects', component: <DashProjects /> },
     { id: 'blog', component: <DashBlog /> },
   ];
